@@ -18,15 +18,7 @@ User.init({
   email: {
     type: DataTypes.STRING,
     allowNull: true
-  },
-  interests: [{
-    type: DataTypes.STRING,
-    allowNull: true,
-    references: {
-      model: Category,
-      key: 'id'
-    }
-  }],
+  }
   age: {
     type: DataTypes.INTEGER,
     allowNull: false
