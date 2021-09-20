@@ -48,4 +48,4 @@ Project.init({
   }
 }, { sequelize, modelName: project })
 
-module.extends = Project
+module.exports = Project
