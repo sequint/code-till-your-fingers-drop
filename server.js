@@ -5,7 +5,7 @@ require('dotenv').config()
 const express = require('express')
 const { join } = require('path')
 const passport = require('passport')
-const { User, Post } = require('./models')
+// const { User, Post } = require('./models')
 const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt')
 
 // Name app variable to hold express router functions.
@@ -18,22 +18,22 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Initialize passport for encyption of password and user tokens.
-app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.initialize())
+// app.use(passport.session())
 
-passport.use(User.createStrategy())
+// passport.use(User.createStrategy())
 
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
+// passport.serializeUser(User.serializeUser())
+// passport.deserializeUser(User.deserializeUser())
 
 // Get the token of the user from localStorage, then sign in user if it is available.
 // Join user id with post.
-passport.use(new JWTStrategy({
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.SECRET
-}, ({ id }, cb) => User.findOne({ where: { id }, include: [Post] })
-  .then(user => cb(null, user))
-  .catch(err => cb(err, null))))
+// passport.use(new JWTStrategy({
+//   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+//   secretOrKey: process.env.SECRET
+// }, ({ id }, cb) => User.findOne({ where: { id }, include: [Post] })
+//   .then(user => cb(null, user))
+//   .catch(err => cb(err, null))))
 
 // Use and import routes folder.
 app.use(require('./routes'))
@@ -42,4 +42,3 @@ app.use(require('./routes'))
 require('./db')
   .sync()
   .then(() => app.listen(process.env.PORT || 3000))
-  
