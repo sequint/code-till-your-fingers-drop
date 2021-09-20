@@ -38,7 +38,7 @@ Project.init({
     allowNull: false,
     defaultValue: 0
   },
-  categoryID: {
+  categoryId: {
     type: DataTypes.STRING,
     allowNull: true,
     references: {
