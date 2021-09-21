@@ -8,6 +8,7 @@ const User = require('./User')
 
 // Join tables with a foreignKey value.
 
+
 // Export all models in an object.
 module.exports = {
   Category,
