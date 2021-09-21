@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 const { Project } = require('./')
-const sequelize = require('../db')
+const sequelize = require('../config/connection')
 
 class Task extends Model {}
 
