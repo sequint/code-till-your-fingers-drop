@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 const { User, Category } = require('./')
 const sequelize = require('../db');
-const User = require('./User');
 
 class Project extends Model {}
 
@@ -55,6 +54,6 @@ Project.init({
       key: 'id'
     }
   }
-}, { sequelize, modelName: project })
+}, { sequelize, modelName: 'project' })
 
 module.exports = Project
