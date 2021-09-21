@@ -1,0 +1,5 @@
+-- DROP DATABASE
+DROP DATABASE IF EXISTS codefingers_db;
+
+-- CREATE DATABASE
+CREATE DATABASE codefingers_db;
