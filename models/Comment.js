@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
-const { Task } = require('./')
+const { Task, User } = require('./')
 const sequelize = require('../db')
 
 class Comment extends Model {}
@@ -15,11 +15,19 @@ Comment.init({
     type: DataTypes.STRING,
     allowNull: false
   },
-  task_id: {
+  taskId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: Task,
+      key: 'id'
+    }
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
       key: 'id'
     }
   }
