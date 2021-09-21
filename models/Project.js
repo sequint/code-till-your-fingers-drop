@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
-const { Category } = require('./')
-const sequelize = require('../db')
+const { User, Category } = require('./')
+const sequelize = require('../db');
+const User = require('./User');
 
 class Project extends Model {}
 
@@ -37,6 +38,14 @@ Project.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 0
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: User,
+      key: 'id'
+    }
   },
   categoryId: {
     type: DataTypes.STRING,
