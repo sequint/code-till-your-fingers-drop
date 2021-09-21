@@ -19,11 +19,11 @@ Comment.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: Task,
+      model: 'tasks',
       key: 'id'
     }
   },
-  userId: {
+  commentorId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
