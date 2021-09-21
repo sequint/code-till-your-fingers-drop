@@ -47,7 +47,7 @@ Project.init({
     }
   },
   categoryId: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: true,
     references: {
       model: Category,
