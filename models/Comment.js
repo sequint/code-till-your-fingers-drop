@@ -13,7 +13,7 @@ Comment.init({
   },
   content: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   task_id: {
     type: DataTypes.INTEGER,
