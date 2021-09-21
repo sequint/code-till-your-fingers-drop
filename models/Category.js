@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
-const sequelize = require('../db')
+const sequelize = require('../config/connection')
 
 // Create a class for the category table that extends from Model library.
 class Category extends Model {}
