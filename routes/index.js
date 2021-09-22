@@ -5,7 +5,7 @@ const router = require('express').Router()
 router.use('/api', require('./categoryRoutes'))
 // router.use('/api', require('./commentRoutes'))
 router.use('/api', require('./interestRoutes'))
-// router.use('/api', require('./projectRoutes'))
+router.use('/api', require('./projectRoutes'))
 // router.use('/api', require('./taskRoutes'))
 router.use('/api', require('./userRoutes'))
 
