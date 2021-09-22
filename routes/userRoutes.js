@@ -42,4 +42,19 @@ router.post('/users', (req, res) => {
     }))
 })
 
+// Update a user's information.
+router.put('/users/:id', (req, res) => {
+  User.update(req.body, {
+    where: { id: req.params.id }
+  })
+    .then(user => res.json({
+      status: 200,
+      user: req.body
+    }))
+    .catch(err => res.json({
+      status: 400,
+      err: err
+    }))
+})
+
 module.exports = router
