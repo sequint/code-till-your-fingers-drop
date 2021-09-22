@@ -44,6 +44,19 @@ router.post('/categories', (req, res) => {
 })
 
 // Put route - receives category data from front-end and updates the row in the database with a matching id.
+router.put('/categories/:id', (req, res) => {
+  Category.update(req.body, {
+    where: { id: req.params.id }
+  })
+    .then(category => res.json({
+      status: 200,
+      category: req.body
+    }))
+    .catch(err => res.json({
+      status: 400,
+      err: err
+    }))
+})
 
 // Delete route - receives a category id from the front-end and deletes the matching row in the database.
 
