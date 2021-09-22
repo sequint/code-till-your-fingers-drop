@@ -59,6 +59,18 @@ router.put('/categories/:id', (req, res) => {
 })
 
 // Delete route - receives a category id from the front-end and deletes the matching row in the database.
+router.delete('/categories/:id', (req, res) => {
+  Category.destroy({
+    where: { id: req.params.id }
+  })
+    .then(category => res.json({
+      status: 200
+    }))
+    .catch(err => res.json({
+      status: 400,
+      err: err
+    }))
+})
 
 // Export all routes using router variable.
 module.exports = router
