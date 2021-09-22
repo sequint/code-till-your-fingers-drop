@@ -14,7 +14,7 @@ User.hasMany(Project, { foreignKey: 'userId' })
 Project.belongsTo(User, { foreignKey: 'userId' })
 
 User.hasMany(Interest, { foreignKey: 'userId' })
-Interest.belongsTo(User, { foreignKey: 'userId '})
+Interest.belongsTo(User, { foreignKey: 'userId'})
 
 User.hasMany(Comment, { foreignKey: 'commentorId' })
 Comment.belongsTo(User, { foreignKey: 'commentorId' })
