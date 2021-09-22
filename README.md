@@ -9,7 +9,7 @@ Other users can comment on those tasks to help them out and follow the project i
 
 - [Dependencies](#Dependencies)
 - [License](#License)
-- [Deployment](#Deployed Site)
+- [Deployment](#Deployment)
 
 ## Dependencies
 
@@ -40,6 +40,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Deployed Site
+## Deployment
 
 Website link to go here.
