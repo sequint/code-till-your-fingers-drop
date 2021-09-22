@@ -4,7 +4,7 @@ const { Comment } = require('../models')
 // Get all Comments.
 router.get('/comments', (req, res) => {
   Comment.findAll()
-    .then(Comment => res.json({
+    .then(comments => res.json({
       status: 200,
       comments: comments
     }))
