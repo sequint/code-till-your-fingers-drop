@@ -57,4 +57,18 @@ router.put('/users/:id', (req, res) => {
     }))
 })
 
+// Delete a user.
+router.delete('/users/:id', (req, res) => {
+  User.destroy({
+    where: { id: req.params.id }
+  })
+    .then(user => res.json({
+      status: 200
+    }))
+    .catch(err => res.json({
+      status: 400,
+      err: err
+    }))
+})
+
 module.exports = router
