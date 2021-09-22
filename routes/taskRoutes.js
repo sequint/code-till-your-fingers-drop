@@ -31,7 +31,7 @@ router.get('/tasks/:id', (req, res) => {
 
 // Create a new tasks.
 router.post('/tasks', (req, res) => {
-  Tasks.create(req.body)
+  Task.create(req.body)
     .then(task => res.json({
       status: 200,
       task: task
@@ -43,7 +43,7 @@ router.post('/tasks', (req, res) => {
 })
 
 // Update a task's information.
-router.put('/task/:id', (req, res) => {
+router.put('/tasks/:id', (req, res) => {
   Task.update(req.body, {
     where: { id: req.params.id }
   })
@@ -58,7 +58,7 @@ router.put('/task/:id', (req, res) => {
 })
 
 // Delete a task.
-router.delete('/task/:id', (req, res) => {
+router.delete('/tasks/:id', (req, res) => {
   Task.destroy({
     where: { id: req.params.id }
   })
