@@ -37,22 +37,6 @@ Project.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 0
-  },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: 'id'
-    }
-  },
-  categoryId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    references: {
-      model: Category,
-      key: 'id'
-    }
   }
 }, { sequelize, modelName: 'project' })
 

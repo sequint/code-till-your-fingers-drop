@@ -15,14 +15,6 @@ Task.init({
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
-  },
-  projectId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Project,
-      key: 'id'
-    }
   }
 }, { sequelize, modelName: 'task' })
 

@@ -14,22 +14,6 @@ Comment.init({
   content: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  taskId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'tasks',
-      key: 'id'
-    }
-  },
-  commentorId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: 'id'
-    }
   }
 }, { sequelize, modelName: 'comment'})
 
