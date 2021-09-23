@@ -1,3 +1,39 @@
+
+const findCategoryAndSetData = (userMatch, categoryName) => {
+
+  // Check if category typed in already exists.
+  axios.get('/api/categories')
+    .then(({ data: payload }) => {
+      let categoryMatch = payload.categories.filter(category => category.title === categoryName)
+      if (!categoryMatch.length) {
+        // Post new category
+        axios.post('/api/categories', {
+          title: categoryName
+        })
+          .then(({ data: payload }) => {
+            // Return new category created.
+            console.log(payload.category.title)
+            findCategoryAndSetData(userMatch, payload.category.title)
+          })
+          .catch(err => console.log(err))
+
+        console.log({ newCategory })
+
+      }
+      else {
+        // Return an array with the match category and user to the next then.
+        return [categoryMatch, userMatch]
+      }
+
+    })
+    .then(([categoryMatch, userMatch]) => {
+      console.log(categoryMatch)
+      console.log(userMatch)
+    })
+    .catch(err => console.log(err))
+
+}
+
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
@@ -16,33 +52,39 @@ document.getElementById('createProject').addEventListener('click', event => {
     .then(userMatch => {
       // Create a variable for category input.
       let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
+
+      findCategoryAndSetData(userMatch, categoryName)
       
-      // Check if category typed in already exists.
-      axios.get('/api/categories')
-        .then(({ data: payload }) => {
-          let categoryMatch = payload.categories.filter(category => category.title === categoryName)
-          if (!categoryMatch.length) {
-            // Post new category
-            axios.post('/api/categories',  {
-              title: categoryName
-            })
-              .then(({ data: payload }) => {
-                console.log(payload.category)
-              })
-              .catch(err => console.log(err))
-          }
-          else {
-            // Return an array with the match category and user to the next then.
-            return [categoryMatch, userMatch]
-          }
+      // // Check if category typed in already exists.
+      // axios.get('/api/categories')
+      //   .then(({ data: payload }) => {
+      //     let categoryMatch = payload.categories.filter(category => category.title === categoryName)
+      //     if (!categoryMatch.length) {
+      //       // Post new category
+      //       axios.post('/api/categories',  {
+      //         title: categoryName
+      //       })
+      //         .then(({ data: payload }) => {
+      //           // Return new category created.
+      //           let newCategory = payload.category
+      //           return [newCategory, userMatch]
+      //         })
+      //         .catch(err => console.log(err))
+            
+      //       console.log({newCategory})
+            
+      //     }
+      //     else {
+      //       // Return an array with the match category and user to the next then.
+      //       return [categoryMatch, userMatch]
+      //     }
 
-
-        })
-        .then(([ categoryMatch, userMatch ]) => {
-          console.log(categoryMatch)
-          console.log(userMatch)
-        })
-        .catch(err => console.log(err))
+      //   })
+      //   .then(([ categoryMatch, userMatch ]) => {
+      //     console.log(categoryMatch)
+      //     console.log(userMatch)
+      //   })
+      //   .catch(err => console.log(err))
 
       // // Create data variable using values from form inputs.
       // projectName = event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value
