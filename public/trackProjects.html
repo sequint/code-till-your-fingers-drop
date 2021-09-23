@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Projects</title>
+  <title>Project 2</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -34,7 +34,7 @@
           </svg>
           About Us
         </a>
-        <a class="nav-link active" aria-current="page" href="./myProjects.html">
+        <a class="nav-link" href="./myProjects.html">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-lightbulb d-inline-block align-text-top" viewBox="0 0 16 16">
             <path
@@ -50,7 +50,7 @@
           </svg>
           Search Projects
         </a>
-        <a class="nav-link" href="./trackProjects.html">
+        <a class="nav-link active" aria-current="page" href="./trackProjects.html">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-bookmark-heart d-inline-block align-text-top" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
@@ -77,98 +77,12 @@
       <!-- navbar for page content -->
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <a class="nav-link disabled h2" id="myProTitle">My Projects</a>
-
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createNewProjectModal">
-            Create a new project
-          </button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="createNewProjectModal" tabindex="-1" aria-labelledby="createNewProjectModal"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="createNewProjectModal">Create a new project</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-
-                  <!-- Create project form in modal -->
-                  <form class="row g-3">
-
-                    <!-- project title input -->
-                    <div class="col-12 mb-3">
-                      <label for="projectTitle" class="col-form-label">Title</label>
-                      <input type="text" class="form-control" id="projectTitle">
-                    </div>
-
-                    <!-- project description input -->
-                    <div class="col-12 mb-3">
-                      <label for="projectDes" class="col-form-label">Description</label>
-                      <textarea class="form-control" id="projectDes"></textarea>
-                    </div>
-
-                    <!-- project category input -->
-                    <div class="col-12 mb-3">
-                      <label for="projectCat" class="col-form-label">Category</label>
-                      <input type="text" class="form-control" id="projectCat">
-                    </div>
-
-                    <!-- project tasks input -->
-                    <div class="col-12 mb-3">
-                      <label for="projectTasks" class="col-form-label">Add Tasks</label>
-                      <input type="text" class="form-control" id="projectTasks">
-                    </div>
-
-                    <!-- div to display project tasks -->
-                    <div class="col-12 mb-0 mt-0">
-                      <!-- example tasks (can delete) -->
-                      <ul>
-                        <li>
-                          <p>Task #1 <button type="button" class="btn btn-danger btn-sm">X</button></p>
-                        </li>
-                        <li>
-                          <p>Task #2 <button type="button" class="btn btn-danger btn-sm">X</button></p>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label for="startDate" class="col-form-label">Start Date</label>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label for="endDate" class="col-form-label">End Date</label>
-                    </div>
-
-                    <!-- start date input -->
-                    <div class="col-md-6 mb-3 mt-0">
-                      <input type="date" class="form-control" id="startDate">
-                    </div>
-
-                    <!-- end date input -->
-                    <div class="col-md-6 mb-3 mt-0">
-                      <input type="date" class="form-control" id="endDate">
-                    </div>
-
-                  </form>
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="createProject">Create Project</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <a class="nav-link disabled h2" id="myProTitle">Track Projects</a>
         </div>
       </nav>
 
-      <!-- div for displaying my projects -->
-      <div class="container" id="displayProjects">
+      <!-- div for displaying user projects -->
+      <div class="container" id="displayUserProjects">
 
         <div class="row">
 
@@ -180,7 +94,7 @@
 
                   <!-- project title & description-->
                   <div class="col">
-                    <h5 class="card-title">Project #1</h5>
+                    <h5 class="card-title">User's Project #1</h5>
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio nihil ea suscipit
                       ratione rem. Quia
                       magnam recusandae, sed delectus fuga quas velit aspernatur iste similique repellat provident quod,
@@ -214,10 +128,9 @@
                   </div>
                 </div>
 
-                <!-- project link btn and delete btn -->
-                <a href="./exProjectPg.html" class="btn btn-primary">Project #1</a>
-                <button type="button" class="btn btn-danger" id="deleteProject">Delete Project</button>
-
+                <!-- user's project link btn and remove btn -->
+                <a href="./exTrackPro.html" class="btn btn-primary">Details</a>
+                <button type="button" class="btn btn-danger" id="removeProject">Remove Project</button>
               </div>
             </div>
           </div>
@@ -233,8 +146,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="./assets/js/myProjects.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js%22%3E"></script>
+
 </body>
 
 </html>

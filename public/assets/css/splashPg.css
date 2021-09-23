@@ -1,0 +1,14 @@
+* {
+  color: white;
+}
+
+body {
+  background-image: url('https://wallpaperaccess.com/full/628237.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.aboutUsDiv {
+  padding-top: 15rem;
+}
