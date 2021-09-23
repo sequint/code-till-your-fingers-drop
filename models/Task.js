@@ -11,6 +11,10 @@ Task.init({
     primaryKey: true,
     autoIncrement: true
   },
+  taskDescription: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
   isComplete: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
