@@ -1,15 +1,9 @@
 
 // Function that set all data recieved from the user.
-const setData = (userMatch, categoryMatch, projectName, description, startDate) => {
+const setData = projectData => {
 
   // Create a post axios request to send new project information to the database.
-  axios.post('/api/projects', {
-    projectName: projectName,
-    description: description,
-    startDate: startDate,
-    categoryId: categoryId,
-    userId: userId
-  })
+  axios.post('/api/projects', projectData)
     .then(({ data: project }) => {
       console.log(`${project.project.projectName} project created!`)
     })
@@ -46,7 +40,9 @@ const findCategory = (categoryName, projectData) => {
     .then(([ categoryMatch ]) => {
       // Add the matched category's id to the project data object.
       projectData.categoryId = categoryMatch.id
-      console.log(projectData)
+      
+      // Send data to set data function to post the final project data set to a new project.
+      setData(projectData)
 
     })
     .catch(err => console.log(err))
