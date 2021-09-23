@@ -82,3 +82,27 @@ document.getElementById('createProject').addEventListener('click', event => {
     .catch(err => console.log(err))
 
 })
+
+// Function that gets projects of user and displays them in the DOM as cards.
+const displayProjects = _ => {
+
+  // Temp user name.
+  let userName = 'Sleepy Neko'
+
+  // Find the matching current user in the user database, and get user information.
+  axios.get(`/api/users`,)
+    .then(({ data: payload }) => {
+      let users = payload.users
+      let userMatch = users.filter(user => user.username === userName)
+
+      return userMatch
+    })
+    .then()
+    .catch()
+
+  // Get all projects for a user.
+  axios.get('api/projects')
+
+}
+
+// On page load display all current project cards.

@@ -17,6 +17,10 @@ router.post('/users/login', (req, res) => {
   })
 })
 
+router.get('/users/projects', passport.authenticate('jwt'), (req, res) => {
+  res.json(req.user)
+})
+
 // Get all users.
 router.get('/users', (req, res) => {
   User.findAll()
