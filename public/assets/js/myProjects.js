@@ -22,8 +22,13 @@ document.getElementById('createProject').addEventListener('click', event => {
         .then(({ data: payload }) => {
           let categoryMatch = payload.categories.filter(category => category.title === categoryName)
           if (!categoryMatch.length) {
-            console.log('No category in our database for that yet.  You are the first!')
+            console.log(categoryName)
             // Post new category
+            axios.post('/api/categories',  {
+              title: categoryName
+            })
+              .then(() => console.log('Category created!'))
+              .catch(err => console.log(err))
           }
           else {
             console.log('Category found!')
