@@ -22,17 +22,25 @@ document.getElementById('createProject').addEventListener('click', event => {
         .then(({ data: payload }) => {
           let categoryMatch = payload.categories.filter(category => category.title === categoryName)
           if (!categoryMatch.length) {
-            console.log(categoryName)
             // Post new category
             axios.post('/api/categories',  {
               title: categoryName
             })
-              .then(() => console.log('Category created!'))
+              .then(({ data: payload }) => {
+                console.log(payload.category)
+              })
               .catch(err => console.log(err))
           }
           else {
-            console.log('Category found!')
+            // Return an array with the match category and user to the next then.
+            return [categoryMatch, userMatch]
           }
+
+
+        })
+        .then(([ categoryMatch, userMatch ]) => {
+          console.log(categoryMatch)
+          console.log(userMatch)
         })
         .catch(err => console.log(err))
 
