@@ -14,7 +14,7 @@ Task.init({
   taskDescription: {
     type: DataTypes.STRING,
     allowNull: false
-  }
+  },
   isComplete: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
