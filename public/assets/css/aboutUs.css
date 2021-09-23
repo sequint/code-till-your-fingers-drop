@@ -1,0 +1,22 @@
+* {
+  color: white;
+}
+
+body {
+  background-image: url('https://wallpaperaccess.com/full/628237.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.card {
+  background-color: transparent;
+}
+
+.aboutUsDiv {
+  padding-top: 6rem;
+}
+
+.profilesDiv {
+  padding-top: 3rem;
+}
