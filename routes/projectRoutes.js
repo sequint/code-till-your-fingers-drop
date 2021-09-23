@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { Project } = require('../models')
+const passport = require('passport')
 
 // Get all projects.
 router.get('/projects', (req, res) => {
@@ -30,8 +31,13 @@ router.get('/projects/:id', (req, res) => {
 })
 
 // Create a new project.
-router.post('/projects', (req, res) => {
-  Project.create(req.body)
+router.post('/projects', passport.authenticate('jwt'), (req, res) => {
+  Project.create({
+    projectName: req.body.projectName,
+    description: req.body.description,
+    startDate: req.body.description,
+    userId: req.user.id
+  })
     .then(project => res.json({
       status: 200,
       project: project
