@@ -44,7 +44,7 @@ document.getElementById('lButton').addEventListener('click', event => {
     .then(({ data: token }) => {
       if (token) {
         localStorage.setItem('token', token)
-        window.location = '/'
+        window.location = '/myProjects.html'
       } else {
         alert('Invalid username or password.')
       }
