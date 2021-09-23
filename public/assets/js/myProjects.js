@@ -1,28 +1,59 @@
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
-  console.log('in')
 
-  // Create data variable using values from form inputs.
-  projectName = event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value
-  console.log(projectName)
+  let userName = 'Sleepy Neko'
 
-  description = event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value
-  console.log(description)
+  // Find the matching current user in the user database, and get user information.
+  axios.get(`/api/users`,)
+    .then(({ data: payload }) => {
+      let users = payload.users
+      let userMatch = users.filter(user => user.username === userName)
 
-  startDate = event.target.parentNode.parentNode.children[1].children[0].children[7].children[0].value
-  console.log(startDate)
+      return userMatch
 
-  // Create a post axios request to send new project information to the database.
-  axios.post('/api/projects', {
-    projectName: projectName,
-    description: description,
-    startDate: startDate
-  })
-    .then(({ data: projectName, description, startDate }) => {
-      console.log('in then')
-      alert(`${projectName} project created!`)
     })
-    .catch(err = console.log('in error'))
+    .then(userMatch => {
+      // Create a variable for category input.
+      let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
+      
+      // Check if category typed in already exists.
+      axios.get('/api/categories')
+        .then(({ data: payload }) => {
+          let categoryMatch = payload.categories.filter(category => category.title === categoryName)
+          if (!categoryMatch.length) {
+            console.log('No category in our database for that yet.  You are the first!')
+            // Post new category
+          }
+          else {
+            console.log('Category found!')
+          }
+        })
+        .catch(err => console.log(err))
+
+      // // Create data variable using values from form inputs.
+      // projectName = event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value
+
+      // description = event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value
+
+      // startDate = event.target.parentNode.parentNode.children[1].children[0].children[7].children[0].value
+
+      // userId = userMatch[0].id
+      // console.log(userId)
+
+      // // Create a post axios request to send new project information to the database.
+      // axios.post('/api/projects', {
+      //   projectName: projectName,
+      //   description: description,
+      //   startDate: startDate,
+      //   categoryId: categoryId,
+      //   userId: userId
+      // })
+      //   .then(({ data: project }) => {
+      //     console.log(`${project.project.projectName} project created!`)
+      //   })
+      //   .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
 
 })
