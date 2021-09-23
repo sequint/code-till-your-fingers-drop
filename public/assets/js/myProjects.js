@@ -1,6 +1,7 @@
-const addTasksToDB = projectData => {
+const addTasksToDB = (projectId, tasks) => {
 
-  console.log(projectData)
+  console.log(projectId)
+  console.log(tasks)
 
 }
 
@@ -60,6 +61,7 @@ document.getElementById('createProject').addEventListener('click', event => {
 
       // Create data variable using values from form inputs.
       let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
+      let tasks = event.target.parentNode.parentNode.children[1].children[0].children[3].children[1].value
 
       // Create a post axios request to send new project information to the database.
       axios.post('/api/projects', projectData)
@@ -67,7 +69,7 @@ document.getElementById('createProject').addEventListener('click', event => {
           addCategoryId(categoryName, payload.project)
           return payload.project
         })
-        .then(project => console.log(project))
+        .then(project => addTasksToDB(project.id, tasks))
         .catch(err => console.log(err))
       
     })
