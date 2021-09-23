@@ -1,7 +1,12 @@
-const addTasksToDB = (projectId, tasks) => {
+// Function that adds the tasks for the project into the tasks table with it's project id.
+const addTasksToDB = (projectId, task) => {
 
-  console.log(projectId)
-  console.log(tasks)
+  // Create a post request to add the new tasks.
+  axios.post('/api/tasks', {
+    taskDescription: task,
+    isComplete: false,
+    projectId: projectId
+  })
 
 }
 
@@ -38,6 +43,7 @@ const addCategoryId = (categoryName, projectData) => {
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
 
+  // Temp user name.
   let userName = 'Sleepy Neko'
 
   // Find the matching current user in the user database, and get user information.
