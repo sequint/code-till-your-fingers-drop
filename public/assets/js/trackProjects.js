@@ -178,63 +178,65 @@ const displayProjects = _ => {
     .then(({ data: payload }) => {
       console.log(payload.tracks)
 
-      // Loop through projects array returned and append each project to the DOM.
+      // Loop through user tracks and find the joined project, then append project to the page.
       payload.tracks.forEach(track => {
         console.log(track.projectId)
         axios.get(`/api/projects/${track.projectId}`)
-          .then(project => {
+          .then(({ data: payload}) => {
+            // Assign the joined project to a project variable.
+            let project = payload.project[0]
             console.log(project)
+
+            // Append project information to the page in a card.
+            let projectCard = document.createElement('div')
+            projectCard.className = 'row'
+            projectCard.innerHTML = `
+            <div class="col-sm-12 mt-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row mb-2">
+
+                      <!-- project title & description-->
+                      <div class="col">
+                        <h5 class="card-title">${project.projectName}</h5>
+                        <p class="card-text">${project.description}</p>
+                      </div>
+
+                      <!-- calendar icon and project start & end dates-->
+                      <div class="col">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                          class="bi bi-calendar-week" viewBox="0 0 16 16">
+                          <path
+                            d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                          <path
+                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
+                        <p class="card-text mb-0">Start Date: ${project.startDate}</p>
+                      </div>
+
+                    </div>
+
+                    <!-- project progress and progress bar -->
+                    <div class="row mb-4">
+                      <div class="col">
+                        <p class="card-text mb-0">Progress:</p>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: ${project.percentComplete}%" aria-valuenow="${project.percentComplete}"
+                            aria-valuemin="0" aria-valuemax="100">${project.percentComplete}%</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- user's project link btn and remove btn -->
+                    <a href="./exTrackPro.html" class="btn btn-primary">Details</a>
+                    <button type="button" class="btn btn-danger" id="removeProject">Remove Project</button>
+                  </div>
+                </div>
+              </div>
+            `
+            document.getElementById('displayUserProjects').append(projectCard)
           })
           .catch(err => console.log(err))
-
-        let projectCard = document.createElement('div')
-        projectCard.className = 'row'
-        projectCard.innerHTML = `
-        <div class="col-sm-12 mt-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="row mb-2">
-
-                  <!-- project title & description-->
-                  <div class="col">
-                    <h5 class="card-title">${project.title}</h5>
-                    <p class="card-text">${project.description}</p>
-                  </div>
-
-                  <!-- calendar icon and project start & end dates-->
-                  <div class="col">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                      class="bi bi-calendar-week" viewBox="0 0 16 16">
-                      <path
-                        d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                      <path
-                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                    </svg>
-                    <p class="card-text mb-0">Start Date: ${project.startDate}</p>
-                  </div>
-
-                </div>
-
-                <!-- project progress and progress bar -->
-                <div class="row mb-4">
-                  <div class="col">
-                    <p class="card-text mb-0">Progress:</p>
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">25%</div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- user's project link btn and remove btn -->
-                <a href="./exTrackPro.html" class="btn btn-primary">Details</a>
-                <button type="button" class="btn btn-danger" id="removeProject">Remove Project</button>
-              </div>
-            </div>
-          </div>
-        `
-
-        document.getElementById('displayUserProjects').append(projectCard)
 
       })
 
