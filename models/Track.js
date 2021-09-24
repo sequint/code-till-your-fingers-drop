@@ -11,6 +11,6 @@ Track.init({
     primaryKey: true,
     autoIncrement: true
   }
-})
+}, { sequelize, modelName: 'track' })
 
 module.exports = Track
