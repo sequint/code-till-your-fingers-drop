@@ -43,26 +43,25 @@ const addCategoryId = (categoryName, projectData) => {
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
 
-      // Create data variable using values from form inputs.
-      let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
-      let tasks = event.target.parentNode.parentNode.children[1].children[0].children[3].children[1].value
-
-      // Create a post axios request to send new project information to the database.
-      axios.post('/api/projects', {
-        projectName: event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value,
-        description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value,
-        startDate: event.target.parentNode.parentNode.children[1].children[0].children[7].children[0].value
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-        .then(({ data: payload }) => {
-          addCategoryId(categoryName, payload.project)
-          return payload.project
-        })
-        .then(project => addTasksToDB(project.id, tasks))
-        .catch(err => console.log(err))
+  // Create data variable using values from form inputs.
+  let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
+  let tasks = event.target.parentNode.parentNode.children[1].children[0].children[3].children[1].value
+  // Create a post axios request to send new project information to the database.
+  axios.post('/api/projects', {
+    projectName: event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value,
+    description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value,
+    startDate: event.target.parentNode.parentNode.children[1].children[0].children[7].children[0].value
+  }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+    .then(({ data: payload }) => {
+      addCategoryId(categoryName, payload.project)
+      return payload.project
+    })
+    .then(project => addTasksToDB(project.id, tasks))
+    .catch(err => console.log(err))
 
 })
 
