@@ -39,6 +39,24 @@ const addCategoryId = (categoryName, projectData) => {
 
 }
 
+// Create an array to hold the tasks entered.
+let tasks = []
+
+// Create a function to post the tasks into the array to tasks table with the project id attached.
+const addTasks = projectData => {
+  console.log(tasks)
+
+  // Iterate through tasks list and post each task to the tasks model with current project id.
+  tasks.forEach(task => {
+    axios.post('/api/tasks', {
+      taskDescription: task,
+      isComplete: false,
+      projectId: projectData.id
+    })
+  })
+
+}
+
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
@@ -57,6 +75,7 @@ document.getElementById('createProject').addEventListener('click', event => {
     }
   })
     .then(({ data: payload }) => {
+      addTasks(payload.project)
       addCategoryId(categoryName, payload.project)
       return payload.project
     })
@@ -65,8 +84,33 @@ document.getElementById('createProject').addEventListener('click', event => {
 
 })
 
+
+
+document.getElementById('add-task-button').addEventListener('click', event => {
+  event.preventDefault()
+  console.log('in click')
+
+  console.log(event.target.parentNode.children[1].value)
+
+  // Element to hold the task value entered.
+  let task = event.target.parentNode.children[1].value
+
+  // Push new task value into the tasks array.
+  tasks.push(task)
+
+  // Create element to hold task html and append to the task list.
+  let nextTask = document.createElement('li')
+  nextTask.innerHTML = `
+  <p>${task}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+  `
+  document.getElementById('task-list').append(nextTask)
+  document.getElementById('projectTasks').value = ''
+
+})
+
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
+  console.log(tasks)
 
   // Get all projects for a user.
   axios.get('/api/projects', {
