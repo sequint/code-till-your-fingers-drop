@@ -8,7 +8,7 @@ document.addEventListener('click', event => {
     localStorage.setItem('trackProject', projectId)
 
     // Go to individual tracked project window.
-    window.open('./exTrackPro.html')
+    window.location.href = './exTrackPro.html'
 
   }
 
