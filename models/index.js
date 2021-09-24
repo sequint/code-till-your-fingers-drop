@@ -19,8 +19,14 @@ Interest.belongsTo(User, { foreignKey: 'userId'})
 User.hasMany(Comment, { foreignKey: 'commentorId' })
 Comment.belongsTo(User, { foreignKey: 'commentorId' })
 
+User.hasMany(Track, { foreignKey: 'userId' })
+Track.belongsTo(User, { foreignKey: 'userId' })
+
 Project.hasMany(Task, { foreignKey: 'projectId' })
 Task.belongsTo(Project, { foreignKey: 'projectId' })
+
+Project.hasMany(Track, { foreignKey: 'projectId' })
+Track.belongsTo(Project, { foreignKey: 'projectId' })
 
 // Export all models in an object.
 module.exports = {
