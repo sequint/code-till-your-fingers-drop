@@ -176,10 +176,16 @@ const displayProjects = _ => {
     }
   })
     .then(({ data: payload }) => {
-      console.log(payload.project)
+      console.log(payload.tracks)
 
       // Loop through projects array returned and append each project to the DOM.
-      payload.project.forEach(project => {
+      payload.tracks.forEach(track => {
+        console.log(track.projectId)
+        axios.get(`/api/projects/${track.projectId}`)
+          .then(project => {
+            console.log(project)
+          })
+          .catch(err => console.log(err))
 
         let projectCard = document.createElement('div')
         projectCard.className = 'row'
