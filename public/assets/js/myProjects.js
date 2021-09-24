@@ -1,12 +1,56 @@
-// Function that adds the tasks for the project into the tasks table with it's project id.
-const addTasksToDB = (projectId, task) => {
+// Function to render newly created project card to the page.
+const renderProjects = project => {
 
-  // Create a post request to add the new tasks.
-  axios.post('/api/tasks', {
-    taskDescription: task,
-    isComplete: false,
-    projectId: projectId
-  })
+  const projectEl = document.createElement('div')
+  projectEl.className = 'col-sm-12 mt-3'
+  projectEl.innerHTML = `
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-2">
+        
+          <div class="col">
+            <h5 class="card-title">${project.projectName}</h5>
+            <p class="card-text">${project.description}</p>
+          </div>
+
+          <div class="col">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar-week" viewBox="0 0 16 16">
+              <path
+                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+              <path
+                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+            </svg>
+            <p class="card-text mb-0">Start Date: ${project.startDate}</p>
+            <p class="card-text mt-0">End Date: Not Yet Defined</p>           
+
+          </div>
+
+        </div>
+
+        <div class="row mb-4">
+
+          <div class="col">
+            <p class="card-text mb-0">Progress:</p>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="25"
+                      aria-valuemin="0" aria-valuemax="100">0%</div>
+              </div>               
+          </div>
+
+        </div>
+
+        <a href="#" class="btn btn-primary">Details</a>
+        <button type="button" class="btn btn-danger delete" data-projectId="${project.id}" id="deleteProject">Delete Project</button>
+
+      </div>
+    </div>
+  `
+
+  document.getElementById('displayProjects').append(projectEl)
+  document.getElementById('projectTitle').value = ''
+  document.getElementById('projectDes').value = ''
+  document.getElementById('projectCat').value = ''
+  document.getElementById('startDate').value = ''
 
 }
 
@@ -60,6 +104,7 @@ const addTasks = projectData => {
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
+  console.log(event.target.parentNode.parentNode.children[1].children[0].children[5])
 
   // Create data variable using values from form inputs.
   let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
@@ -68,7 +113,7 @@ document.getElementById('createProject').addEventListener('click', event => {
   axios.post('/api/projects', {
     projectName: event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value,
     description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value,
-    startDate: event.target.parentNode.parentNode.children[1].children[0].children[7].children[0].value
+    startDate: event.target.parentNode.parentNode.children[1].children[0].children[5].children[0].value
   }, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -77,9 +122,8 @@ document.getElementById('createProject').addEventListener('click', event => {
     .then(({ data: payload }) => {
       addTasks(payload.project)
       addCategoryId(categoryName, payload.project)
-      return payload.project
+      renderProjects(payload.project)
     })
-    .then(project => addTasksToDB(project.id, tasks))
     .catch(err => console.log(err))
 
 })
@@ -108,6 +152,20 @@ document.getElementById('add-task-button').addEventListener('click', event => {
 
 })
 
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('delete')) {
+    console.log(event.target.dataset.projectid)
+    let id = event.target.dataset.projectid
+    
+    axios.delete(`/api/projects/${id}`)
+      .then(() => {
+        document.getElementById('displayProjects').innerHTML = ''
+        displayProjects()
+      })
+      .catch(err => console.log(err))
+  }
+})
+
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
   console.log(tasks)
@@ -122,6 +180,7 @@ const displayProjects = _ => {
 
       // Loop through projects array returned and append each project to the DOM.
       payload.project.forEach(project => {
+        console.log(project)
 
         let projectCard = document.createElement('div')
         projectCard.className = 'row'
@@ -165,7 +224,7 @@ const displayProjects = _ => {
 
                 <!-- project link btn and delete btn -->
                 <a href="./exProjectPg.html" class="btn btn-primary">See Project</a>
-                <button type="button" class="btn btn-danger" id="deleteProject">Delete Project</button>
+                <button type="button" class="btn btn-danger delete" data-projectId="${project.id}" id="deleteProject">Delete Project</button>
 
               </div>
             </div>

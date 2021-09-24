@@ -4,7 +4,6 @@ const passport = require('passport')
 
 // Get specific project by id.
 router.get('/projects', passport.authenticate('jwt'), (req, res) => {
-  console.log('In route')
   Project.findAll({
     where: { userId: req.user.id }
   })
