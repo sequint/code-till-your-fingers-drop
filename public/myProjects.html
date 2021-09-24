@@ -130,21 +130,15 @@
                       <ul id="task-list"></ul>
                     </div>
 
+                    <!-- start date input -->
                     <div class="col-md-6">
                       <label for="startDate" class="col-form-label">Start Date</label>
-                    </div>
-
-                    <div class="col-md-6">
-                      <label for="endDate" class="col-form-label">End Date</label>
-                    </div>
-
-                    <!-- start date input -->
-                    <div class="col-md-6 mb-3 mt-0">
                       <input type="date" class="form-control" id="startDate">
                     </div>
-
+                    
                     <!-- end date input -->
-                    <div class="col-md-6 mb-3 mt-0">
+                    <div class="col-md-6">
+                      <label for="endDate" class="col-form-label">End Date</label>
                       <input type="date" class="form-control" id="endDate">
                     </div>
 
@@ -153,7 +147,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="createProject">Create Project</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="createProject">Create Project</button>
                 </div>
               </div>
             </div>
@@ -162,7 +156,8 @@
       </nav>
 
       <!-- div for displaying my projects -->
-      <div class="container" id="displayProjects"></div>
+
+        <div class="row" id="displayProjects"></div>
 
     </div>
 
@@ -172,6 +167,7 @@
     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./assets/js/myProjects2.js"></script>
   <script src="./assets/js/myProjects.js"></script>
 </body>
 
