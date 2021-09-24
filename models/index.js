@@ -22,9 +22,6 @@ Comment.belongsTo(User, { foreignKey: 'commentorId' })
 Project.hasMany(Task, { foreignKey: 'projectId' })
 Task.belongsTo(Project, { foreignKey: 'projectId' })
 
-Task.hasMany(Comment, { foreignKey: 'commentId' })
-Comment.belongsTo(Task, { foreignKey: 'commentId' })
-
 // Export all models in an object.
 module.exports = {
   Category,
