@@ -5,6 +5,7 @@ const Interest = require('./Interest')
 const Project = require('./Project')
 const Task = require('./Task')
 const User = require('./User')
+const Track = require('./Track')
 
 // Join parent tables with child tables on the child tables foreign key.
 Category.hasMany(Project, { foreignKey: 'categoryId'})
@@ -35,5 +36,6 @@ module.exports = {
   Interest,
   Project,
   Task,
-  User
+  User,
+  Track
 }
