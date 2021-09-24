@@ -39,6 +39,24 @@ const addCategoryId = (categoryName, projectData) => {
 
 }
 
+// Create an array to hold the tasks entered.
+let tasks = []
+
+// Create a function to post the tasks into the array to tasks table with the project id attached.
+const addTasks = projectData => {
+  console.log(tasks)
+
+  // Iterate through tasks list and post each task to the tasks model with current project id.
+  tasks.forEach(task => {
+    axios.post('/api/tasks', {
+      taskDescription: task,
+      isComplete: false,
+      projectId: projectData.id
+    })
+  })
+
+}
+
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
@@ -57,6 +75,7 @@ document.getElementById('createProject').addEventListener('click', event => {
     }
   })
     .then(({ data: payload }) => {
+      addTasks(payload.project)
       addCategoryId(categoryName, payload.project)
       return payload.project
     })
@@ -65,8 +84,7 @@ document.getElementById('createProject').addEventListener('click', event => {
 
 })
 
-  // Create an array to hold the tasks entered.
-  let tasks = []
+
 
 document.getElementById('add-task-button').addEventListener('click', event => {
   event.preventDefault()
@@ -92,6 +110,7 @@ document.getElementById('add-task-button').addEventListener('click', event => {
 
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
+  console.log(tasks)
 
   // Get all projects for a user.
   axios.get('/api/projects', {
