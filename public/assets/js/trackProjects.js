@@ -1,3 +1,19 @@
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('getDetails')) {
+
+    // Set variable for project id clicked on.
+    console.log(event.target.dataset.projectid)
+    let projectId = event.target.dataset.projectid
+    localStorage.setItem('trackProject', projectId)
+
+    // Go to individual tracked project window.
+    window.open('./exTrackPro.html')
+
+  }
+
+})
+
 // Delete a project from user tracked projects.
 document.addEventListener('click', event => {
   if (event.target.classList.contains('removeProject')) {
@@ -73,7 +89,7 @@ const displayProjects = _ => {
                     </div>
 
                     <!-- user's project link btn and remove btn -->
-                    <a href="./exTrackPro.html" class="btn btn-primary">Details</a>
+                    <button class="btn btn-primary getDetails" data-projectid="${project.id}">Details</button>
                     <button type="button" class="btn btn-danger removeProject" data-trackid="${track.id}" id="removeProject">Remove Project</button>
                   </div>
                 </div>
