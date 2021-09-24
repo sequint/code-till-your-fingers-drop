@@ -1,39 +1,40 @@
-let searchable = [
-  'Elastic',
-  'PHP',
-  'Something about CSS',
-  'How to code',
-  'JavaScript',
-  'Coding',
-  'Some other item',
-];
+const projectCards = document.getElementById('projectCardDB');
+const searchBar = document.getElementById('searchBar');
+let projectCavas = [];
 
-const searchInput = document.getElementById('search');
-const searchWrapper = document.querySelector('.wrapper');
-const resultsWrapper = document.querySelector('.results');
+searchBar.addEventListener('keyup', (e) => {
+  const searchString = e.target.value.toLowerCase();
 
-searchInput.addEventListener('keyup', () => {
-  let results = [];
-  let input = searchInput.value;
-  if (input.length) {
-    results = searchable.filter((item) => {
-      return item.toLowerCase().includes(input.toLowerCase());
-    });
-  }
-  renderResults(results);
+  const filteredProjects = hpCharacters.filter((project) => {
+    return (
+      project.name.toLowerCase().includes(searchString) ||
+      project.progress.toLowerCase().includes(searchString) ||
+      project.comments.toLowerCase().includes(searchString) ||
+      project.date.toLowerCase().includes(searchString) 
+    );
+  });
+  displayProjects(filteredProjects);
 });
 
-function renderResults(results) {
-  if (!results.length) {
-    return searchWrapper.classList.remove('show');
+const loadProjects = async () => {
+  try {
+    const res = await fetch('/api/projects');
+    projectCanvas = await res.json();
+    displayProjects(projectCanvas);
+  } catch (err) {
+    console.error(err);
   }
+};
 
-  const content = results
-    .map((item) => {
-      return `<li>${item}</li>`;
+const displayProjects = (projects) => {
+  const htmlString = projects 
+    .map((project) => {
+      return `
+          <div class="results">
+        `;
     })
     .join('');
+  projectsList.innerHTML = htmlString;
+};
 
-  searchWrapper.classList.add('show');
-  resultsWrapper.innerHTML = `<ul>${content}</ul>`;
-}
+loadProjects();
