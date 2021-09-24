@@ -11,7 +11,7 @@ Interest.init({
     primaryKey: true,
     autoIncrement: true
   },
-  interest_name: {
+  interestName: {
     type: DataTypes.STRING,
     allowNull: false
   }

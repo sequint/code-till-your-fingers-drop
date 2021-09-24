@@ -8,6 +8,7 @@ router.use('/api', require('./interestRoutes'))
 router.use('/api', require('./projectRoutes'))
 router.use('/api', require('./taskRoutes'))
 router.use('/api', require('./userRoutes'))
+router.use('/api', require('./trackRoutes'))
 
 // Export the router file to use elsewhere as 'router'.
 module.exports = router
