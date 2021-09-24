@@ -23,7 +23,7 @@ router.post('/projects', passport.authenticate('jwt'), (req, res) => {
   Project.create({
     projectName: req.body.projectName,
     description: req.body.description,
-    startDate: req.body.description,
+    startDate: req.body.startDate,
     userId: req.user.id
   })
     .then(project => res.json({
