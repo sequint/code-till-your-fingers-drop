@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize')
-const { User, Project } = require('./')
 const sequelize = require('../config/connection')
 
 class Track extends Model {}
