@@ -1,3 +1,4 @@
+// Function to render newly created project card to the page.
 const renderProjects = project => {
 
   const projectEl = document.createElement('div')
@@ -39,7 +40,7 @@ const renderProjects = project => {
         </div>
 
         <a href="#" class="btn btn-primary">Details</a>
-        <button type="button" class="btn btn-danger delete" data-index="${project.id}" id="deleteProject">Delete Project</button>
+        <button type="button" class="btn btn-danger delete" data-projectId="${project.id}" id="deleteProject">Delete Project</button>
 
       </div>
     </div>
@@ -151,6 +152,20 @@ document.getElementById('add-task-button').addEventListener('click', event => {
 
 })
 
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('delete')) {
+    console.log(event.target.dataset.projectid)
+    let id = event.target.dataset.projectid
+    
+    axios.delete(`/api/projects/${id}`)
+      .then(() => {
+        document.getElementById('displayProjects').innerHTML = ''
+        displayProjects()
+      })
+      .catch(err => console.log(err))
+  }
+})
+
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
   console.log(tasks)
@@ -165,6 +180,7 @@ const displayProjects = _ => {
 
       // Loop through projects array returned and append each project to the DOM.
       payload.project.forEach(project => {
+        console.log(project)
 
         let projectCard = document.createElement('div')
         projectCard.className = 'row'
@@ -208,7 +224,7 @@ const displayProjects = _ => {
 
                 <!-- project link btn and delete btn -->
                 <a href="./exProjectPg.html" class="btn btn-primary">See Project</a>
-                <button type="button" class="btn btn-danger" id="deleteProject">Delete Project</button>
+                <button type="button" class="btn btn-danger delete" data-projectId="${project.id}" id="deleteProject">Delete Project</button>
 
               </div>
             </div>
