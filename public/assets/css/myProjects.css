@@ -27,3 +27,13 @@ body {
 #myProTitle {
   color: black;
 }
+
+.task-input {
+  display: inline;
+  width: 285px;
+}
+
+.add-task-button:hover {
+  cursor: pointer;
+  fill: darkblue;
+}

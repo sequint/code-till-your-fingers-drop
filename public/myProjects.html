@@ -120,20 +120,14 @@
                     <!-- project tasks input -->
                     <div class="col-12 mb-3">
                       <label for="projectTasks" class="col-form-label">Add Tasks</label>
-                      <input type="text" class="form-control" id="projectTasks">
+                      <input type="text" class="form-control task-input" id="projectTasks">
+                      <button id="add-task-button">+</button>
                     </div>
 
-                    <!-- div to display project tasks -->
+                    <!-- Div to display project tasks -->
                     <div class="col-12 mb-0 mt-0">
-                      <!-- example tasks (can delete) -->
-                      <ul>
-                        <li>
-                          <p>Task #1 <button type="button" class="btn btn-danger btn-sm">X</button></p>
-                        </li>
-                        <li>
-                          <p>Task #2 <button type="button" class="btn btn-danger btn-sm">X</button></p>
-                        </li>
-                      </ul>
+                      <!-- Task List -->
+                      <ul id="task-list"></ul>
                     </div>
 
                     <!-- start date input -->
@@ -162,11 +156,8 @@
       </nav>
 
       <!-- div for displaying my projects -->
-      <div class="container">
 
         <div class="row" id="displayProjects"></div>
-
-      </div>
 
     </div>
 

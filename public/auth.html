@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/auth.css">
+  <title>Sign In & Sign Up</title>
+</head>
+
+<body>
+
+  <section class="left-section">
+    <div id="left-cover" class="cover cover-hide">
+      <img src="./assets/img/cover.jpg" alt="">
+      <h1>Welcome !</h1>
+      <h3>Already have an account ?</h3>
+      <button type="button" class="switch-btn" onclick="location.reload()">Login</button>
+    </div>
+    <div id="left-form" class="form fade-in-element">
+      <h1>Login</h1>
+      <form action="" method="post">
+        <input type="text" name="user-name" class="input-box" id="lUsername" placeholder="User Name">
+        <input type="password" name="user-pass" class="input-box" id="lPassword" placeholder="Password">
+        <input type="button" name="login-btn" class="btn" id="lButton" value="Login">
+      </form>
+    </div>
+  </section>
+
+  <section class="right-section">
+    <div id="right-cover" class="cover fade-in-element">
+      <img src="./assets/img/cover.jpg" alt="">
+      <h1>Welcome !</h1>
+      <h3>Don't have an account ?</h3>
+      <button type="button" class="switch-btn" onclick="switchSignup()">Signup</button>
+    </div>
+    <div id="right-form" class="form form-hide">
+      <h1>Signup</h1>
+      <form action="" method="post">
+        <input type="text" name="user-name" class="input-box" id="username" placeholder="User Name">
+        <input type="email" name="user-email" class="input-box" id="email" placeholder="Email">
+        <input type="text" name="user-age" class="input-box" id="age" placeholder="Age">
+        <input type="password" name="user-pass" class="input-box" id="password" placeholder="Password">
+        <input type="button" name="signup-btn" class="btn" id="signUp" value="Signup">
+      </form>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./assets/js/auth.js"></script>
+</body>
+
+</html>
