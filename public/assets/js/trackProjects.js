@@ -152,19 +152,19 @@
 
 // })
 
-// document.addEventListener('click', event => {
-//   if (event.target.classList.contains('delete')) {
-//     console.log(event.target.dataset.projectid)
-//     let id = event.target.dataset.projectid
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('removeProject')) {
+    console.log(event.target.dataset.trackid)
+    let id = event.target.dataset.trackid
 
-//     axios.delete(`/api/projects/${id}`)
-//       .then(() => {
-//         document.getElementById('displayProjects').innerHTML = ''
-//         displayProjects()
-//       })
-//       .catch(err => console.log(err))
-//   }
-// })
+    axios.delete(`/api/tracks/${id}`)
+      .then(() => {
+        document.getElementById('displayUserProjects').innerHTML = ''
+        displayProjects()
+      })
+      .catch(err => console.log(err))
+  }
+})
 
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
@@ -179,7 +179,7 @@ const displayProjects = _ => {
 
       // Loop through user tracks and find the joined project, then append project to the page.
       payload.tracks.forEach(track => {
-        
+
         axios.get(`/api/projects/${track.projectId}`)
           .then(({ data: payload}) => {
             // Assign the joined project to a project variable.
@@ -227,7 +227,7 @@ const displayProjects = _ => {
 
                     <!-- user's project link btn and remove btn -->
                     <a href="./exTrackPro.html" class="btn btn-primary">Details</a>
-                    <button type="button" class="btn btn-danger" id="removeProject">Remove Project</button>
+                    <button type="button" class="btn btn-danger removeProject" data-trackid="${track.id}" id="removeProject">Remove Project</button>
                   </div>
                 </div>
               </div>
