@@ -65,6 +65,31 @@ document.getElementById('createProject').addEventListener('click', event => {
 
 })
 
+  // Create an array to hold the tasks entered.
+  let tasks = []
+
+document.getElementById('add-task-button').addEventListener('click', event => {
+  event.preventDefault()
+  console.log('in click')
+
+  console.log(event.target.parentNode.children[1].value)
+
+  // Element to hold the task value entered.
+  let task = event.target.parentNode.children[1].value
+
+  // Push new task value into the tasks array.
+  tasks.push(task)
+
+  // Create element to hold task html and append to the task list.
+  let nextTask = document.createElement('li')
+  nextTask.innerHTML = `
+  <p>${task}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+  `
+  document.getElementById('task-list').append(nextTask)
+  document.getElementById('projectTasks').value = ''
+
+})
+
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
 
