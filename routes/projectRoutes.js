@@ -2,23 +2,11 @@ const router = require('express').Router()
 const { Project } = require('../models')
 const passport = require('passport')
 
-// Get all projects.
-router.get('/projects', (req, res) => {
-  Project.findAll()
-    .then(projects => res.json({
-      status: 200,
-      projects: projects
-    }))
-    .catch(err => res.json({
-      status: 400,
-      err: err
-    }))
-})
-
 // Get specific project by id.
-router.get('/projects/:id', (req, res) => {
+router.get('/projects', passport.authenticate('jwt'), (req, res) => {
+  console.log('In route')
   Project.findAll({
-    where: { id: req.params.id }
+    where: { id: req.user.id }
   })
     .then(project => res.json({
       status: 200,

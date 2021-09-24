@@ -70,8 +70,16 @@ document.getElementById('createProject').addEventListener('click', event => {
 const displayProjects = _ => {
 
   // Get all projects for a user.
-  axios.get('api/projects')
+  axios.get('/api/projects', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+    .then(({ data: payload }) => console.log(payload.project))
+    .catch(err => console.log(err))
+
 
 }
 
 // On page load display all current project cards.
+displayProjects()
