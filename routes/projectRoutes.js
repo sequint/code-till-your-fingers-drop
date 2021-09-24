@@ -6,7 +6,7 @@ const passport = require('passport')
 router.get('/projects', passport.authenticate('jwt'), (req, res) => {
   console.log('In route')
   Project.findAll({
-    where: { id: req.user.id }
+    where: { userId: req.user.id }
   })
     .then(project => res.json({
       status: 200,

@@ -76,11 +76,13 @@ const displayProjects = _ => {
     }
   })
     .then(({ data: payload }) => {
-      console.log(payload.project)
-      let project = payload.project[0]
-      let projectCard = document.createElement('div')
-      projectCard.className = 'row'
-      projectCard.innerHTML = `
+
+      // Loop through projects array returned and append each project to the DOM.
+      payload.project.forEach(project => {
+
+        let projectCard = document.createElement('div')
+        projectCard.className = 'row'
+        projectCard.innerHTML = `
       <div class="col-sm-12 mt-3">
             <div class="card">
               <div class="card-body">
@@ -127,10 +129,12 @@ const displayProjects = _ => {
           </div>
       `
 
-      document.getElementById('displayProjects').append(projectCard)
+        document.getElementById('displayProjects').append(projectCard)
+
+      })
+      
     })
     .catch(err => console.log(err))
-
 
 }
 
