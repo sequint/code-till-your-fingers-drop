@@ -1,9 +1,12 @@
 const router = require('express').Router()
 const { Track } = require('../models')
+const passport = require('passport')
 
 // Get all track.
-router.get('/tracks', (req, res) => {
-  Track.findAll()
+router.get('/tracks', passport.authenticate('jwt'), (req, res) => {
+  Track.findAll({
+    where: { userId: req.user.id }
+  })
     .then(tracks => res.json({
       status: 200,
       tracks: tracks
