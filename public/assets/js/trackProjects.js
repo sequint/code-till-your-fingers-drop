@@ -176,16 +176,14 @@ const displayProjects = _ => {
     }
   })
     .then(({ data: payload }) => {
-      console.log(payload.tracks)
 
       // Loop through user tracks and find the joined project, then append project to the page.
       payload.tracks.forEach(track => {
-        console.log(track.projectId)
+        
         axios.get(`/api/projects/${track.projectId}`)
           .then(({ data: payload}) => {
             // Assign the joined project to a project variable.
             let project = payload.project[0]
-            console.log(project)
 
             // Append project information to the page in a card.
             let projectCard = document.createElement('div')
