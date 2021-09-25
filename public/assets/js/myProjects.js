@@ -178,7 +178,6 @@ const displayProjects = _ => {
 
       // Loop through projects array returned and append each project to the DOM.
       payload.project.forEach(project => {
-        console.log(project)
 
         let projectCard = document.createElement('div')
         projectCard.className = 'row'
