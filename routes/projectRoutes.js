@@ -56,7 +56,8 @@ router.put('/projects/:id', passport.authenticate('jwt'), (req, res) => {
     projectName: req.body.projectName,
     description: req.body.description,
     startDate: req.body.startDate,
-    userId: req.user.id
+    userId: req.user.id,
+    categoryId: req.body.categoryId
   }, {
     where: { id: req.params.id }
   })

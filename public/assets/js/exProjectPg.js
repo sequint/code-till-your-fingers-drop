@@ -14,6 +14,28 @@ document.addEventListener('click', event => {
 
 })
 
+// Function assigns the categoryId to the project based on category title.
+const addCategoryId = categoryName => {
+
+  let projectId = JSON.parse(localStorage.getItem('myProject'))
+
+  axios.get('/api/categories')
+    .then(({ data: payload }) => {
+      let categoryMatch = payload.categories.filter(category => category.title === categoryName)
+
+      // Update the specific project with the matched category id.
+      axios.put(`/api/projects/${projectId}`, {
+        categoryId: categoryMatch[0].id
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+    })
+    .catch(err => console.log(err))
+
+}
+
 // Create an array to hold the tasks entered.
 let tasks = []
 
@@ -31,7 +53,7 @@ const addTasks = projectId => {
 
 }
 
-// Handle create project click.
+// Handle change project click.
 document.getElementById('saveChanges').addEventListener('click', event => {
   event.preventDefault()
 
@@ -43,8 +65,7 @@ document.getElementById('saveChanges').addEventListener('click', event => {
   // Create a post axios request to send new project information to the database.
   axios.put(`/api/projects/${projectId}`, {
     projectName: event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value,
-    description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value,
-    startDate: event.target.parentNode.parentNode.children[1].children[0].children[5].children[0].value
+    description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value
   }, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -52,8 +73,7 @@ document.getElementById('saveChanges').addEventListener('click', event => {
   })
     .then(({ data: payload }) => {
       addTasks(projectId)
-      addCategoryId(categoryName, payload.project)
-      renderProjects(payload.project)
+      addCategoryId(categoryName)
     })
     .catch(err => console.log(err))
 
@@ -91,6 +111,10 @@ const loadProjectContent = _ => {
       // Set project variable.
       let project = payload.project[0]
 
+      // Model
+      document.getElementById('modalProjectTitle').value = project.projectName
+      document.getElementById('modalDescription').value = project.description
+
       document.getElementById('myIndProjTitle').textContent = project.projectName
       document.getElementById('description').textContent = project.description
       document.getElementById('startDate').textContent = `Start Date: ${project.startDate}`
@@ -105,6 +129,12 @@ const loadProjectContent = _ => {
       `
       document.getElementById('progressArea').append(progressBar)
 
+      axios.get(`/api/categories/${project.categoryId}`)
+        .then(({ data: payload }) => {
+          document.getElementById('modalProjectCat').value = payload.category[0].title
+        })
+        .catch(err => console.log(err))
+
       axios.get(`/api/tasks/${project.id}`)
         .then(({ data: payload }) => {
           // Set array variable for tasks returned.
@@ -114,9 +144,17 @@ const loadProjectContent = _ => {
 
             let taskItem = document.createElement('li')
             taskItem.className = 'm-1'
-            taskItem.textContent = task.taskDescription
+            taskItem.innerHTML = `
+            <p>${task.taskDescription}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+            `
+
+            let nextTask = document.createElement('li')
+            nextTask.innerHTML = `
+            <p>${task.taskDescription}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+            `
 
             // Append new task to the task list.
+            document.getElementById('task-list').append(nextTask)
             document.getElementById('tasksLi').append(taskItem)
 
           })
