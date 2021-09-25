@@ -2,10 +2,25 @@ const router = require('express').Router()
 const { Project } = require('../models')
 const passport = require('passport')
 
-// Get specific project by id.
+// Get specific project by user id.
 router.get('/projects', passport.authenticate('jwt'), (req, res) => {
   Project.findAll({
     where: { userId: req.user.id }
+  })
+    .then(project => res.json({
+      status: 200,
+      project: project
+    }))
+    .catch(err => res.json({
+      status: 400,
+      err: err
+    }))
+})
+
+// Get specific project by project id.
+router.get('/projects/:id', (req, res) => {
+  Project.findAll({
+    where: { id: req.params.id }
   })
     .then(project => res.json({
       status: 200,

@@ -29,6 +29,9 @@ Task.belongsTo(Project, { foreignKey: 'projectId' })
 Project.hasMany(Track, { foreignKey: 'projectId' })
 Track.belongsTo(Project, { foreignKey: 'projectId' })
 
+Project.hasMany(Comment, { foreignKey: 'projectId' })
+Comment.belongsTo(Project, { foreignKey: 'projectId' })
+
 // Export all models in an object.
 module.exports = {
   Category,

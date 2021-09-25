@@ -14,10 +14,10 @@ router.get('/tasks', (req, res) => {
     }))
 })
 
-// Get specific task by id.
+// Get specific task by project id.
 router.get('/tasks/:id', (req, res) => {
   Task.findAll({
-    where: { id: req.params.id }
+    where: { projectId: req.params.id }
   })
     .then(task => res.json({
       status: 200,

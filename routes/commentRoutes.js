@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { Comment } = require('../models')
+const passport = require('passport')
 
 // Get all Comments.
 router.get('/comments', (req, res) => {
@@ -17,7 +18,7 @@ router.get('/comments', (req, res) => {
 // Get specific comments by id.
 router.get('/comments/:id', (req, res) => {
   Comment.findAll({
-    where: { id: req.params.id }
+    where: { projectId: req.params.id }
   })
     .then(comment => res.json({
       status: 200,
@@ -30,8 +31,12 @@ router.get('/comments/:id', (req, res) => {
 })
 
 // Create a new comment.
-router.post('/comments', (req, res) => {
-  Comment.create(req.body)
+router.post('/comments', passport.authenticate('jwt'), (req, res) => {
+  Comment.create({
+    content: req.body.content,
+    commentorId: req.user.id,
+    projectId: req.body.projectId
+  })
     .then(comment => res.json({
       status: 200,
       comment: comment
