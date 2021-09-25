@@ -26,8 +26,10 @@ router.get('/users/projects', passport.authenticate('jwt'), (req, res) => {
 })
 
 // Get all users.
-router.get('/users', (req, res) => {
-  User.findAll()
+router.get('/users', passport.authenticate('jwt'), (req, res) => {
+  User.findAll({
+    where: { id: req.user.id }
+  })
     .then(users => res.json({
       status: 200,
       users: users
