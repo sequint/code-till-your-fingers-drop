@@ -4,9 +4,24 @@ document.addEventListener('click', event => {
   if (event.target.classList.contains('addComment')) {
 
     // Define variables based on user input.
-    let comment = event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value
+    let content = event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value
+    let projectId = JSON.parse(localStorage.getItem('trackProject'))
+    console.log(projectId)
+    console.log(content)
     
-    
+    // Post comment to database with the project id and use passport to post with user's id.
+    axios.post('api/comments', {
+      content: content,
+      projectId: projectId
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(({ data: payload }) => {
+        console.log(payload)
+        document.getElementById('userComment').value = ''
+      })
 
   }
 
@@ -30,7 +45,7 @@ document.addEventListener('click', event => {
 // Load all project content to the page
 const loadProjectContent = _ => {
   // Grab project id clicked on from local storage and store into a variable.
-  let projectId = localStorage.getItem('trackProject')
+  let projectId = JSON.parse(localStorage.getItem('trackProject'))
 
   // Get project with the id.
   axios.get(`/api/projects/${projectId}`)
