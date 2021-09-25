@@ -50,7 +50,7 @@ document.addEventListener('click', event => {
 // Delete a project from user tracked projects.
 document.addEventListener('click', event => {
   if (event.target.classList.contains('removeProject')) {
-    console.log('in click')
+    
     // Get track id from local storage
     let id = JSON.parse(localStorage.getItem('trackId'))
 

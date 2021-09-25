@@ -1,30 +1,29 @@
-// // Delete a project from user tracked projects.
-// document.addEventListener('click', event => {
-//   if (event.target.classList.contains('removeProject')) {
-//     console.log('in click')
-//     // Get track id from local storage
-//     let id = JSON.parse(localStorage.getItem('trackId'))
+// Function to delete the project.
+document.addEventListener('click', event => {
 
-//     axios.delete(`/api/tracks/${id}`)
-//       .then(() => {
-//         window.location.href = './trackProjects.html'
-//       })
-//       .catch(err => console.log(err))
-//   }
-// })
+  if (event.target.classList.contains('deleteProject')) {
+
+    let id = JSON.parse(localStorage.getItem('myProject'))
+
+    axios.delete(`/api/projects/${id}`)
+      .then(() => {
+        window.location.href = './myProjects.html'
+      })
+      .catch(err => console.log(err))
+  }
+
+})
 
 // Load all project content to the page
 const loadProjectContent = _ => {
   // Grab project id clicked on from local storage and store into a variable.
   let projectId = JSON.parse(localStorage.getItem('myProject'))
-  console.log(projectId)
 
   // Get project with the id.
   axios.get(`/api/projects/${projectId}`)
     .then(({ data: payload }) => {
       // Set project variable.
       let project = payload.project[0]
-      console.log(project)
 
       document.getElementById('myIndProjTitle').textContent = project.projectName
       document.getElementById('description').textContent = project.description
