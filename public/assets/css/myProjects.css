@@ -1,31 +1,5 @@
-body {
-  height: 100vh;
-}
-
-.homeBody {
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-}
-
-.colHeight {
-  height: 100vh;
-}
-
-.nav-link.disabled {
-  color: white;
-}
-
-.nav-link {
-  color: white;
-}
-
-.nav-link:hover {
-  color: gray;
-}
-
-#myProTitle {
-  color: black;
+.modalBtnDiv {
+  margin: 12px;
 }
 
 .task-input {
