@@ -37,13 +37,22 @@ searchBar.addEventListener('keyup', event => {
     suggestions.forEach(suggestion => {
 
       let suggestItem = document.createElement('li')
-      suggestItem.className = `list-group-item ${suggestion}`
+      suggestItem.className = `list-group-item suggestion`
+      suggestItem.dataset.suggName = `${suggestion}`
       suggestItem.textContent = suggestion
 
       // Append suggested category to the page.
       document.getElementById('suggestions').append(suggestItem)
 
     })
+  }
+
+})
+
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('suggestion')) {
+    console.log(event.target.dataset.suggName)
   }
 
 })
