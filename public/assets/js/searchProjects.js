@@ -126,7 +126,7 @@ document.addEventListener('click', event => {
                         </div>
 
                         <!-- project link btn and delete btn -->
-                        <button type="button" class="btn btn-primary trackProject" data-projectId="${project.id}" id="trackProject">Track Project</button>
+                        <button type="button" class="btn btn-primary trackProject" data-projectid="${project.id}" id="trackProject">Track Project</button>
 
                       </div>
                     </div>
@@ -147,3 +147,27 @@ document.addEventListener('click', event => {
 
 })
 
+// Handle track project click by updating track table with user and project information.
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('trackProject')) {
+    
+    // Assign project id variable to the dataset value.
+    let projectId = event.target.dataset.projectid
+    console.log(projectId)
+
+    axios.post(`/api/tracks/`, {
+      projectId: projectId
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(({ data: payload }) => {
+        console.log(payload.track)
+      })
+      .catch(err => console.log(err))
+
+  }
+
+})
