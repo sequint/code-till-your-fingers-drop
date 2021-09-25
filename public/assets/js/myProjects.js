@@ -88,7 +88,6 @@ let tasks = []
 
 // Create a function to post the tasks into the array to tasks table with the project id attached.
 const addTasks = projectData => {
-  console.log(tasks)
 
   // Iterate through tasks list and post each task to the tasks model with current project id.
   tasks.forEach(task => {

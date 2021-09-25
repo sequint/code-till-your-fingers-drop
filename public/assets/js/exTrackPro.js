@@ -1,4 +1,19 @@
 
+// Delete a project from user tracked projects.
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('removeProject')) {
+    console.log(event.target.dataset.trackid)
+    let id = event.target.dataset.trackid
+
+    axios.delete(`/api/tracks/${id}`)
+      .then(() => {
+        document.getElementById('displayUserProjects').innerHTML = ''
+        displayProjects()
+      })
+      .catch(err => console.log(err))
+  }
+})
+
 // Load all project content to the page
 const loadProjectContent = _ => {
   // Grab project id clicked on from local storage and store into a variable.
@@ -24,6 +39,24 @@ const loadProjectContent = _ => {
       </div>
       `
       document.getElementById('progressArea').append(progressBar)
+
+      axios.get(`/api/tasks/${project.id}`)
+        .then(({ data: payload }) => {
+          // Set array variable for tasks returned.
+          let tasks = payload.task
+          console.log(tasks)
+          // Loop through tasks array and append each task to the page.
+          tasks.forEach(task => {
+            
+            let taskItem = document.createElement('li')
+            taskItem.className = 'm-1'
+            taskItem.textContent = task.taskDescription
+            
+            // Append new task to the task list.
+            document.getElementById('tasksLi').append(taskItem)
+
+          })
+        })
 
     })
 
