@@ -32,6 +32,16 @@ input:focus {
   outline: none;
 }
 
+.suggestions {
+  z-index: 2;
+  position: absolute;
+  width: 100%
+}
+
+.list-group-item {
+  margin: 0px;
+}
+
 .results {
   padding: 0px;
 }
