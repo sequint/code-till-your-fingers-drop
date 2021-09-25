@@ -1,8 +1,72 @@
 
+// On add comment click, post to the server and display.
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('addComment')) {
+
+    // Define variables based on user input.
+    let content = event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value
+    let projectId = JSON.parse(localStorage.getItem('trackProject'))
+    console.log(projectId)
+    console.log(content)
+    
+    // Post comment to database with the project id and use passport to post with user's id.
+    axios.post('api/comments', {
+      content: content,
+      projectId: projectId
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(({ data: payload }) => {
+        // Create comment variable to hold the object.
+        let comment = payload.comment
+
+        axios.get(`/api/users/${comment.commentorId}`)
+          .then(({ data: payload }) => {
+            // Assign user data a variable.
+            let user = payload.user[0]
+
+            // Append comment to the page.
+            let commentCard = document.createElement('div')
+            commentCard.className = 'card'
+            commentCard.innerHTML = `
+            <div class="card-body">
+              <h6 class="card-title">${user.username}</h6>
+              <p class="card-text">${comment.content}</p>
+            </div>
+            `
+            document.getElementById('comments').append(commentCard)
+          })
+
+        document.getElementById('userComment').value = ''
+
+      })
+
+  }
+
+})
+
+// Delete a project from user tracked projects.
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('removeProject')) {
+    console.log(event.target.dataset.trackid)
+    let id = event.target.dataset.trackid
+
+    axios.delete(`/api/tracks/${id}`)
+      .then(() => {
+        document.getElementById('displayUserProjects').innerHTML = ''
+        displayProjects()
+      })
+      .catch(err => console.log(err))
+  }
+})
+
 // Load all project content to the page
 const loadProjectContent = _ => {
   // Grab project id clicked on from local storage and store into a variable.
-  let projectId = localStorage.getItem('trackProject')
+  let projectId = JSON.parse(localStorage.getItem('trackProject'))
 
   // Get project with the id.
   axios.get(`/api/projects/${projectId}`)
@@ -24,6 +88,24 @@ const loadProjectContent = _ => {
       </div>
       `
       document.getElementById('progressArea').append(progressBar)
+
+      axios.get(`/api/tasks/${project.id}`)
+        .then(({ data: payload }) => {
+          // Set array variable for tasks returned.
+          let tasks = payload.task
+          console.log(tasks)
+          // Loop through tasks array and append each task to the page.
+          tasks.forEach(task => {
+            
+            let taskItem = document.createElement('li')
+            taskItem.className = 'm-1'
+            taskItem.textContent = task.taskDescription
+            
+            // Append new task to the task list.
+            document.getElementById('tasksLi').append(taskItem)
+
+          })
+        })
 
     })
 

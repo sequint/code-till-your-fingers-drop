@@ -118,14 +118,7 @@
                 <div class="row mb-2">
                   <div class="col">
                     <p class="card-text mb-0">Tasks:</p>
-                    <ul id="tasksLi">
-                      <li class="m-1">
-                        Task #1
-                      </li>
-                      <li class="m-1">
-                        Task #2
-                      </li>
-                    </ul>
+                    <ul id="tasksLi"></ul>
                   </div>
                 </div>
 
@@ -151,10 +144,6 @@
                       <div class="modal-body">
                         <form class="row">
                           <div class="col-12 mb-3">
-                            <label for="username" class="col-form-label">Username</label>
-                            <input type="text" class="form-control" id="username">
-                          </div>
-                          <div class="col-12 mb-3">
                             <label for="userComment" class="col-form-label">Comment</label>
                             <textarea class="form-control" id="userComment"></textarea>
                           </div>
@@ -162,13 +151,13 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Add Comment</button>
+                        <button type="button" class="btn btn-primary addComment">Add Comment</button>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <button type="button" class="btn btn-danger" id="deleteProject">Remove Project</button>
+                <button type="button" class="btn btn-danger" id="removeProject">Remove Project</button>
 
               </div>
             </div>
@@ -181,27 +170,7 @@
       <div class="container" id="displayComments">
         <div class="row mt-2">
           <h5>Comments:</h5>
-          <div class="col-sm-12" id="comments">
-
-            <div class="card">
-              <div class="card-body">
-                <h6 class="card-title">User 1</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.
-                </p>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-body">
-                <h6 class="card-title">User 2</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.
-                </p>
-              </div>
-            </div>
-
-          </div>
+          <div class="col-sm-12" id="comments"></div>
         </div>
       </div>
 
