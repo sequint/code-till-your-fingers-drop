@@ -1,4 +1,3 @@
-
 // On add comment click, post to the server and display.
 document.addEventListener('click', event => {
 
@@ -51,13 +50,13 @@ document.addEventListener('click', event => {
 // Delete a project from user tracked projects.
 document.addEventListener('click', event => {
   if (event.target.classList.contains('removeProject')) {
-    console.log(event.target.dataset.trackid)
-    let id = event.target.dataset.trackid
+    console.log('in click')
+    // Get track id from local storage
+    let id = JSON.parse(localStorage.getItem('trackId'))
 
     axios.delete(`/api/tracks/${id}`)
       .then(() => {
-        document.getElementById('displayUserProjects').innerHTML = ''
-        displayProjects()
+        window.location.href = './trackProjects.html'
       })
       .catch(err => console.log(err))
   }
@@ -73,7 +72,6 @@ const loadProjectContent = _ => {
     .then(({ data: payload }) => {
       // Set project variable.
       let project = payload.project[0]
-      console.log(project)
 
       document.getElementById('myProTitle').textContent = project.projectName
       document.getElementById('description').textContent = project.description
@@ -93,7 +91,6 @@ const loadProjectContent = _ => {
         .then(({ data: payload }) => {
           // Set array variable for tasks returned.
           let tasks = payload.task
-          console.log(tasks)
           // Loop through tasks array and append each task to the page.
           tasks.forEach(task => {
             
@@ -106,6 +103,37 @@ const loadProjectContent = _ => {
 
           })
         })
+        .catch(err => console.log(err))
+
+      axios.get(`/api/comments/${projectId}`)
+        .then(({ data: payload }) => {
+          // Set returned array to a comments variable.
+          let comments = payload.comment
+
+          // Append comments to the page.
+          comments.forEach(comment => {
+            
+            axios.get(`/api/users/${comment.commentorId}`)
+              .then(({ data: payload }) => {
+                // Assign user data a variable.
+                let user = payload.user[0]
+
+                // Append comment to the page.
+                let commentCard = document.createElement('div')
+                commentCard.className = 'card'
+                commentCard.innerHTML = `
+            <div class="card-body">
+              <h6 class="card-title">${user.username}</h6>
+              <p class="card-text">${comment.content}</p>
+            </div>
+            `
+                document.getElementById('comments').append(commentCard)
+              })
+
+          })
+
+        })
+        .catch(err => console.log(err))
 
     })
 

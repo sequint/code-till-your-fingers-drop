@@ -5,7 +5,9 @@ document.addEventListener('click', event => {
     // Set variable for project id clicked on.
     console.log(event.target.dataset.projectid)
     let projectId = event.target.dataset.projectid
+    let trackId = event.target.dataset.trackid
     localStorage.setItem('trackProject', projectId)
+    localStorage.setItem('trackId', trackId)
 
     // Go to individual tracked project window.
     window.location.href = './exTrackPro.html'
@@ -89,7 +91,7 @@ const displayProjects = _ => {
                     </div>
 
                     <!-- user's project link btn and remove btn -->
-                    <button class="btn btn-primary getDetails" data-projectid="${project.id}">Details</button>
+                    <button class="btn btn-primary getDetails" data-projectid="${project.id}" data-trackid="${track.id}">Details</button>
                     <button type="button" class="btn btn-danger removeProject" data-trackid="${track.id}" id="removeProject">Remove Project</button>
                   </div>
                 </div>

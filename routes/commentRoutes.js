@@ -18,7 +18,7 @@ router.get('/comments', (req, res) => {
 // Get specific comments by id.
 router.get('/comments/:id', (req, res) => {
   Comment.findAll({
-    where: { id: req.params.id }
+    where: { projectId: req.params.id }
   })
     .then(comment => res.json({
       status: 200,
