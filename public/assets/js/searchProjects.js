@@ -49,6 +49,10 @@ document.addEventListener('click', event => {
 
   if (event.target.classList.contains('suggestion')) {
 
+    // Clear search bar and suggestions.
+    document.getElementById('searchBar').value = ''
+    document.getElementById('suggestions').innerHTML = ''
+
     // Assign dataset of suggestion name to a variable.
     let suggName = event.target.dataset.suggName
 
