@@ -126,7 +126,9 @@ document.addEventListener('click', event => {
                         </div>
 
                         <!-- project link btn and delete btn -->
-                        <button type="button" class="btn btn-primary trackProject" data-projectid="${project.id}" id="trackProject">Track Project</button>
+                        <div id="trackAdded">
+                          <button type="button" class="btn btn-primary trackProject" data-projectid="${project.id}" id="trackProject">Track Project</button>
+                        </div>
 
                       </div>
                     </div>
@@ -165,6 +167,11 @@ document.addEventListener('click', event => {
     })
       .then(({ data: payload }) => {
         console.log(payload.track)
+        // Display track added message.
+        document.getElementById('trackAdded').innerHTML = `
+        <p>You are now tracking this project!</p>
+        `
+
       })
       .catch(err => console.log(err))
 
