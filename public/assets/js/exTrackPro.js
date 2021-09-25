@@ -1,4 +1,5 @@
 
+// On add comment click, post to the server and display.
 document.addEventListener('click', event => {
 
   if (event.target.classList.contains('addComment')) {
@@ -19,8 +20,28 @@ document.addEventListener('click', event => {
       }
     })
       .then(({ data: payload }) => {
-        console.log(payload)
+        // Create comment variable to hold the object.
+        let comment = payload.comment
+
+        axios.get(`/api/users/${comment.commentorId}`)
+          .then(({ data: payload }) => {
+            // Assign user data a variable.
+            let user = payload.user[0]
+
+            // Append comment to the page.
+            let commentCard = document.createElement('div')
+            commentCard.className = 'card'
+            commentCard.innerHTML = `
+            <div class="card-body">
+              <h6 class="card-title">${user.username}</h6>
+              <p class="card-text">${comment.content}</p>
+            </div>
+            `
+            document.getElementById('comments').append(commentCard)
+          })
+
         document.getElementById('userComment').value = ''
+
       })
 
   }
