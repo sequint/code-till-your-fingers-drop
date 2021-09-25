@@ -49,9 +49,10 @@ document.addEventListener('click', event => {
 
   if (event.target.classList.contains('suggestion')) {
 
-    // Clear search bar and suggestions.
+    // Clear search bar, suggestions, and results.
     document.getElementById('searchBar').value = ''
     document.getElementById('suggestions').innerHTML = ''
+    document.getElementById('searchResults').innerHTML = ''
 
     // Assign dataset of suggestion name to a variable.
     let suggName = event.target.dataset.suggName
@@ -115,8 +116,7 @@ document.addEventListener('click', event => {
                     </div>
 
                     <!-- project link btn and delete btn -->
-                    <a href="./exProjectPg.html" class="btn btn-primary">See Project</a>
-                    <button type="button" class="btn btn-danger delete" data-projectId="${project.id}" id="deleteProject">Delete Project</button>
+                    <button type="button" class="btn btn-primary trackProject" data-projectId="${project.id}" id="trackProject">Track Project</button>
 
                   </div>
                 </div>
@@ -134,3 +134,4 @@ document.addEventListener('click', event => {
   }
 
 })
+
