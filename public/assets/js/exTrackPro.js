@@ -1,4 +1,17 @@
 
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('addComment')) {
+
+    // Define variables based on user input.
+    let comment = event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value
+    
+    
+
+  }
+
+})
+
 // Delete a project from user tracked projects.
 document.addEventListener('click', event => {
   if (event.target.classList.contains('removeProject')) {
