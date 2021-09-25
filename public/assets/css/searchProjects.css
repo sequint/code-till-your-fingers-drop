@@ -1,33 +1,3 @@
-body {
-  height: 100vh;
-}
-
-.homeBody {
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-}
-
-.colHeight {
-  height: 100vh;
-}
-
-.nav-link.disabled {
-  color: white;
-}
-
-.nav-link {
-  color: white;
-}
-
-.nav-link:hover {
-  color: gray;
-}
-
-#myProTitle {
-  color: black;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 * {
   box-sizing: border-box;
