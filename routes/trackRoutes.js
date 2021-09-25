@@ -32,9 +32,12 @@ router.get('/tracks/:id', (req, res) => {
     }))
 })
 
-// Create a new tracks.
-router.post('/tracks', (req, res) => {
-  Track.create(req.body)
+// Create a new tracks with project id and user id.
+router.post('/tracks/', passport.authenticate('jwt'), (req, res) => {
+  Track.create({
+    userId: req.user.id,
+    projectId: req.body.projectId
+  })
     .then(track => res.json({
       status: 200,
       track: track
