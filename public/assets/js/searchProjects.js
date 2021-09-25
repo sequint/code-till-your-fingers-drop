@@ -24,12 +24,8 @@ searchBar.addEventListener('keyup', event => {
   // Clear past suggestions.
   document.getElementById('suggestions').innerHTML = ''
 
-  console.log(categoryTitles)
-  console.log(event.target.value)
-
     // Create a suggestions variable.
   let suggestions = predictionary.predict(event.target.value)
-  console.log(suggestions)
   
   // If there is a keystroke in the search bar, display suggestions.
   if (event.target.value) {
@@ -52,7 +48,31 @@ searchBar.addEventListener('keyup', event => {
 document.addEventListener('click', event => {
 
   if (event.target.classList.contains('suggestion')) {
-    console.log(event.target.dataset.suggName)
+
+    // Assign dataset of suggestion name to a variable.
+    let suggName = event.target.dataset.suggName
+
+    // Get the category id associated with the clicked value.
+    axios.get('/api/categories')
+      .then(({ data: payload }) => {
+
+        // Filter categories array to the matching category title.
+        let suggCategory = payload.categories.filter(category => category.title === suggName)
+        // Assign the matches id to a variable.
+        let suggCategoryId = suggCategory[0].id
+        
+        // Request projects from database who's projecId matches the clicked suggestion.
+        axios.get(`/api/projects/${suggCategoryId}`)
+          .then(({ data: payload }) => {
+
+            console.log(payload.project)
+
+          })
+          .catch(err => console.log(err))
+
+      })
+      .catch(err => console.log(err))
+
   }
 
 })
