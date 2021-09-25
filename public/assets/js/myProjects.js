@@ -165,6 +165,23 @@ document.addEventListener('click', event => {
   }
 })
 
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('seeProject')) {
+
+    // Set variable for project id clicked on.
+    console.log(event.target.dataset.projectid)
+    let projectId = event.target.dataset.projectid
+
+    localStorage.setItem('myProject', projectId)
+
+    // Go to individual tracked project window.
+    window.location.href = './exprojectPg.html'
+
+  }
+
+})
+
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
 
@@ -220,7 +237,7 @@ const displayProjects = _ => {
               </div>
 
               <!-- project link btn and delete btn -->
-              <a href="./exProjectPg.html" class="btn btn-primary">See Project</a>
+              <a href="./exProjectPg.html" class="btn btn-primary seeProject" data-projectid="${project.id}">See Project</a>
               <button type="button" class="btn btn-danger delete" data-projectId="${project.id}" id="deleteProject">Delete Project</button>
 
             </div>
