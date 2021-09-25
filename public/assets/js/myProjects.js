@@ -2,7 +2,7 @@
 const renderProjects = project => {
 
   const projectEl = document.createElement('div')
-  projectEl.className = 'col-sm-12 mt-3'
+  projectEl.className = 'col-sm-6 mb-3'
   projectEl.innerHTML = `
     <div class="card">
       <div class="card-body">
