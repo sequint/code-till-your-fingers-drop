@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sideNavbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 69px;
+  background: #212529;
+  padding: 6px 14px;
+  transition: all 0.5s ease;
+}
+
+.sideNavbar.active {
+  width: 220px;
+}
+
+.appHeader {
+  color: white;
+  height: 50px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: all 0.5s ease;
+}
+
+.sideNavbar.active .appHeader {
+  opacity: 1;
+}
+
+#lightbulb {
+  font-size: 28px;
+}
+
+.appName {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#toggleBtn {
+  color: white;
+  position: absolute;
+  left: 80%;
+  top: 6px;
+  font-size: 21px;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  transform: translateX(-70%);
+  margin-top: 1px;
+}
+
+.sideNavbar.active #toggleBtn {
+  left: 90%;
+}
+
+.navbarLi {
+  list-style: none;
+}
+
+li {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  margin: 0 5px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+a:hover {
+  color: #212529;
+  background: white;
+}
+
+i {
+  height: 50px;
+  min-width: 50px;
+  border-radius: 5px;
+  line-height: 50px;
+  text-align: center;
+}
+
+.navTab {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.sideNavbar.active .navTab {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pageContent {
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 69px);
+  left: 69px;
+  transition: all 0.5s ease;
+  overflow-y: scroll;
+}
+
+.tabTitle {
+  font-size: 35px;
+  font-weight: bold;
+  color: #212529;
+  margin: 12px;
+}
+
+.sideNavbar.active~.pageContent {
+  width: calc(100% - 220px);
+  left: 220px;
+}
+
+.logOutBtn {
+  color: white;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.logOutBtn:hover {
+  color: #212529;
+  background: white;
+}
