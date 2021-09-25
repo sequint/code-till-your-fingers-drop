@@ -50,13 +50,13 @@ document.addEventListener('click', event => {
 // Delete a project from user tracked projects.
 document.addEventListener('click', event => {
   if (event.target.classList.contains('removeProject')) {
-    console.log(event.target.dataset.trackid)
-    let id = event.target.dataset.trackid
+    console.log('in click')
+    // Get track id from local storage
+    let id = JSON.parse(localStorage.getItem('trackId'))
 
     axios.delete(`/api/tracks/${id}`)
       .then(() => {
-        document.getElementById('displayUserProjects').innerHTML = ''
-        displayProjects()
+        window.location.href = './trackProjects.html'
       })
       .catch(err => console.log(err))
   }
