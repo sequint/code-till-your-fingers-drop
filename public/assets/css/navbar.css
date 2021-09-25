@@ -143,4 +143,5 @@ i {
 .logOutBtn:hover {
   color: #212529;
   background: white;
+  cursor: pointer;
 }
