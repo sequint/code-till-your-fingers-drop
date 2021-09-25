@@ -120,7 +120,7 @@
 
             <!-- edit btn and delete btn -->
             <!-- for edit btn -> modal pop up w/ already existing info -> allow to make edits -> click 'save changes' and edited project should show on page -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+            <button type="button" class="btn btn-primary editProject" id="editProject" data-bs-toggle="modal" data-bs-target="#editModal">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-pencil-square" viewBox="0 0 16 16">
                 <path
@@ -163,22 +163,16 @@
                       </div>
 
                       <!-- project tasks input -->
-                      <div class="col-12 mb-3">
-                        <label for="projectTasks" class="col-form-label">Add Tasks</label>
-                        <input type="text" class="form-control" id="projectTasks">
-                      </div>
+                  <div class="col-12 mb-3">
+                    <label for="projectTasks" class="col-form-label">Add Tasks</label>
+                    <input type="text" class="form-control task-input" id="projectTasks">
+                    <button id="addTask">+</button>
+                  </div>
 
                       <!-- div to display project tasks -->
                       <div class="col-12 mb-0 mt-0">
                         <!-- example tasks (can delete) -->
-                        <ul>
-                          <li>
-                            <p>Task #1 <button type="button" class="btn btn-danger btn-sm">X</button></p>
-                          </li>
-                          <li>
-                            <p>Task #2 <button type="button" class="btn btn-danger btn-sm">X</button></p>
-                          </li>
-                        </ul>
+                        <ul id="task-list"></ul>
                       </div>
 
                       <!-- start date input -->
@@ -198,7 +192,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save Changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveChanges">Save Changes</button>
                   </div>
                 </div>
               </div>

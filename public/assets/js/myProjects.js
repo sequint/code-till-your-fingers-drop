@@ -103,7 +103,6 @@ const addTasks = projectData => {
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
-  console.log(event.target.parentNode.parentNode.children[1].children[0].children[5])
 
   // Create data variable using values from form inputs.
   let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
@@ -131,7 +130,6 @@ document.getElementById('createProject').addEventListener('click', event => {
 
 document.getElementById('add-task-button').addEventListener('click', event => {
   event.preventDefault()
-  console.log('in click')
 
   console.log(event.target.parentNode.children[1].value)
 

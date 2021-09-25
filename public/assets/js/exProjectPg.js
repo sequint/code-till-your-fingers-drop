@@ -14,6 +14,72 @@ document.addEventListener('click', event => {
 
 })
 
+// Create an array to hold the tasks entered.
+let tasks = []
+
+// Create a function to post the tasks into the array to tasks table with the project id attached.
+const addTasks = projectId => {
+
+  // Iterate through tasks list and post each task to the tasks model with current project id.
+  tasks.forEach(task => {
+    axios.post('/api/tasks', {
+      taskDescription: task,
+      isComplete: false,
+      projectId: projectId
+    })
+  })
+
+}
+
+// Handle create project click.
+document.getElementById('saveChanges').addEventListener('click', event => {
+  event.preventDefault()
+
+  let projectId = JSON.parse(localStorage.getItem('myProject'))
+
+  // Create data variable using values from form inputs.
+  let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
+
+  // Create a post axios request to send new project information to the database.
+  axios.put(`/api/projects/${projectId}`, {
+    projectName: event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value,
+    description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value,
+    startDate: event.target.parentNode.parentNode.children[1].children[0].children[5].children[0].value
+  }, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+    .then(({ data: payload }) => {
+      addTasks(projectId)
+      addCategoryId(categoryName, payload.project)
+      renderProjects(payload.project)
+    })
+    .catch(err => console.log(err))
+
+})
+
+document.getElementById('addTask').addEventListener('click', event => {
+  event.preventDefault()
+
+  console.log('in click')
+  // Element to hold the task value entered.
+  let task = event.target.parentNode.children[1].value
+  console.log(task)
+
+  // Push new task value into the tasks array.
+  tasks.push(task)
+
+  // Create element to hold task html and append to the task list.
+  let nextTask = document.createElement('li')
+  nextTask.innerHTML = `
+  <p>${task}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+  `
+  document.getElementById('task-list').append(nextTask)
+  document.getElementById('projectTasks').value = ''
+
+})
+
 // Load all project content to the page
 const loadProjectContent = _ => {
   // Grab project id clicked on from local storage and store into a variable.
