@@ -42,6 +42,11 @@ input:focus {
   margin: 0px;
 }
 
+.list-group-item:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
 .results {
   padding: 0px;
 }
