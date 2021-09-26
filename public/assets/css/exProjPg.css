@@ -1,0 +1,12 @@
+.taskDescription {
+  display: inline;
+}
+
+.deleteTask {
+  float: right;
+  margin-right: 900px;
+}
+
+.taskInModal {
+  margin-right: 0px;
+}
