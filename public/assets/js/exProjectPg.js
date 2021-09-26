@@ -103,7 +103,7 @@ document.addEventListener('click', event => {
         // Delete the task from the database using it's id.
         axios.delete(`/api/tasks/${matchedTask[0].id}`)
           .then(() => {
-            
+
             // Clear the task lists.
             document.getElementById('task-list').innerHTML = ''
             document.getElementById('tasksLi').innerHTML = ''
@@ -141,7 +141,8 @@ document.getElementById('saveChanges').addEventListener('click', event => {
     .then(({ data: payload }) => {
       addTasks(projectId)
       addCategoryId(categoryName)
-      loadProjectContent()
+      updateProgressBar(projectId)
+      window.location.href = './exProjectPg.html'
     })
     .catch(err => console.log(err))
 
@@ -168,7 +169,7 @@ document.getElementById('addTask').addEventListener('click', event => {
   // Create element to hold task html and append to the task list.
   let nextTask = document.createElement('li')
   nextTask.innerHTML = `
-  <p>${task}</p>
+  <p class="taskDescription">${task}</p>
   <button type="button" class="btn btn-sm deleteTask">Delete</button>
   `
   document.getElementById('task-list').append(nextTask)
