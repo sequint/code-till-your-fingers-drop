@@ -89,13 +89,14 @@ document.addEventListener('click', event => {
                 taskItem.className = 'm-1'
                 taskItem.innerHTML = `
                 <p class="taskDescription">${task.taskDescription}</p>
-                <button type="button" class="btn btn-danger btn-sm deleteTask">X</button>
+                <button type="button" class="btn btn-sm completeTask">Complete</button>
+                <button type="button" class="btn btn-sm deleteTask">Delete</button>
                 `
 
                 let nextTask = document.createElement('li')
                 nextTask.innerHTML = `
                 <p class="taskDescription">${task.taskDescription}</p>
-                <button type="button" class="btn btn-danger btn-sm deleteTask taskInModal">X</button>
+                <button type="button" class="btn btn-sm deleteTask taskInModal">Delete</button>
                 `
 
                 // Append new task to the task list.
@@ -161,7 +162,8 @@ document.getElementById('addTask').addEventListener('click', event => {
   // Create element to hold task html and append to the task list.
   let nextTask = document.createElement('li')
   nextTask.innerHTML = `
-  <p>${task}<button type="button" class="btn btn-danger btn-sm deleteTask">X</button></p>
+  <p>${task}</p>
+  <button type="button" class="btn btn-sm deleteTask">Delete</button>
   `
   document.getElementById('task-list').append(nextTask)
   document.getElementById('projectTasks').value = ''
@@ -217,13 +219,14 @@ const loadProjectContent = _ => {
             taskItem.className = 'm-1'
             taskItem.innerHTML = `
             <p class="taskDescription">${task.taskDescription}</p>
-            <button type="button" class="btn btn-danger btn-sm deleteTask">X</button>
+            <button type="button" class="btn btn-sm completeTask">Complete</button>
+            <button type="button" class="btn btn-sm deleteTask">Delete</button>
             `
 
             let nextTask = document.createElement('li')
             nextTask.innerHTML = `
             <p class="taskDescription">${task.taskDescription}</p>
-            <button type="button" class="btn btn-sm deleteTask taskInModal">X</button>
+            <button type="button" class="btn btn-sm deleteTask">Delete</button>
             `
 
             // Append new task to the task list.
