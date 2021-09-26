@@ -128,9 +128,10 @@ document.getElementById('saveChanges').addEventListener('click', event => {
 
   // Create data variable using values from form inputs.
   let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
+  console.log(categoryName)
 
   // Create a post axios request to send new project information to the database.
-  axios.put(`/api/projects/searchProjectId/${projectId}`, {
+  axios.put(`/api/projects/${projectId}`, {
     projectName: event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value,
     description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value
   }, {
