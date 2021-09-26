@@ -82,8 +82,9 @@ document.addEventListener('click', event => {
             // Assign userId variable to the current user id.
             let userId = payload.users[0].id
 
-            axios.get(`/api/projects/${suggCategoryId}`)
+            axios.get(`/api/projects/searchCategoryId/${suggCategoryId}`)
               .then(({ data: payload }) => {
+                console.log(payload)
 
                 // Filter for matched projects that are not the current user's.
                 let project = payload.project.filter(proj => proj.userId !== userId)
