@@ -86,7 +86,7 @@ a {
   white-space: nowrap;
 }
 
-a:hover {
+.sideNavbar a:hover {
   color: #212529;
   background: white;
 }
@@ -144,4 +144,12 @@ i {
   color: #212529;
   background: white;
   cursor: pointer;
+}
+
+.calendarIcon {
+  margin-top: 2px;
+}
+
+.datesFS {
+  font-size: 13px;
 }
