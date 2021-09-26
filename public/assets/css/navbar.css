@@ -86,7 +86,7 @@ a {
   white-space: nowrap;
 }
 
-a:hover {
+.sideNavbar a:hover {
   color: #212529;
   background: white;
 }
