@@ -137,6 +137,8 @@ document.getElementById('saveChanges').addEventListener('click', event => {
     })
     .catch(err => console.log(err))
 
+    loadProjectContent()
+
 })
 
 document.getElementById('logOutBtn').addEventListener('click', event => {
@@ -151,7 +153,6 @@ document.getElementById('addTask').addEventListener('click', event => {
   console.log('in click')
   // Element to hold the task value entered.
   let task = event.target.parentNode.children[1].value
-  console.log(task)
 
   // Push new task value into the tasks array.
   tasks.push(task)
