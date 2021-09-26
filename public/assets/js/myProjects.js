@@ -157,37 +157,45 @@ const displayProjects = _ => {
       // Loop through projects array returned and append each project to the DOM.
       payload.project.forEach(project => {
 
-        let projectCard = document.createElement('div')
-        projectCard.className = 'col-sm-3 mb-3'
-        projectCard.innerHTML = `
-          <div class="card">
-            <div class="card-body">
-              <div class="row mb-2">
+        axios.get('/api/categories')
+          .then(({ data: payload }) => {
 
-                 <!-- project title, took the same code from myProjects.js -->
-                <h5 class="card-title">${project.projectName}</h5>
+            let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
 
-                <!-- project category -->
-                <h6 class="card-subtitle mb-2 text-muted"></h6>
+            let projectCard = document.createElement('div')
+            projectCard.className = 'col-sm-3 mb-3'
+            projectCard.innerHTML = `
+            <div class="card">
+              <div class="card-body">
+                <div class="row mb-2">
 
-                <!-- project description, took the same code from myProjects.js  -->
-                <p class="card-text">${project.description}</p>
+                  <!-- project title, took the same code from myProjects.js -->
+                  <h5 class="card-title">${project.projectName}</h5>
+
+                  <!-- project category -->
+                  <h6 class="card-subtitle mb-2 text-muted" id="categoryTitle">${matchedCategory[0].title}</h6>
+
+                  <!-- project description, took the same code from myProjects.js  -->
+                  <p class="card-text">${project.description}</p>
+
+                </div>
+
+                <!-- project link btn and delete btn -->
+                <!-- took the same code from myProjects.js for the project link btn and delete btn and added "outline" class to the btns to change the way it looks -->
+                <a href="./exProjectPg.html" class="btn btn-outline-primary seeProject" data-projectid="${project.id}">See
+                  Project</a>
+                <button type="button" class="btn btn-outline-danger delete" data-projectId="${project.id}"
+                  id="deleteProject">Delete
+                  Project</button>
 
               </div>
-
-              <!-- project link btn and delete btn -->
-              <!-- took the same code from myProjects.js for the project link btn and delete btn and added "outline" class to the btns to change the way it looks -->
-              <a href="./exProjectPg.html" class="btn btn-outline-primary seeProject" data-projectid="${project.id}">See
-                Project</a>
-              <button type="button" class="btn btn-outline-danger delete" data-projectId="${project.id}"
-                id="deleteProject">Delete
-                Project</button>
-
             </div>
-          </div>
-        `
+            `
 
-        document.getElementById('displayProjects').append(projectCard)
+            document.getElementById('displayProjects').append(projectCard)
+
+          })
+          .catch(err => console.log(err))
 
       })
       
