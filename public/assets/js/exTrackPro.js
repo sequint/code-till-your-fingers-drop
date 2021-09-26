@@ -74,14 +74,25 @@ const loadProjectContent = _ => {
   let projectId = JSON.parse(localStorage.getItem('trackProject'))
 
   // Get project with the id.
-  axios.get(`/api/projects/${projectId}`)
+  axios.get(`/api/projects/searchProjectId/${projectId}`)
     .then(({ data: payload }) => {
       // Set project variable.
       let project = payload.project[0]
 
       document.getElementById('myProTitle').textContent = project.projectName
+
+      axios.get('/api/categories')
+        .then(({ data: payload }) => {
+
+          let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
+
+          document.getElementById('indTrackCategory').textContent = matchedCategory[0].title
+
+        })
+        .catch(err => console.log(err))
+
       document.getElementById('description').textContent = project.description
-      document.getElementById('startDate').textContent = project.startDate
+      document.getElementById('startDate').textContent = `Start Date: ${project.startDate}`
       
       let progressBar = document.createElement('div')
       progressBar.className = 'col'
