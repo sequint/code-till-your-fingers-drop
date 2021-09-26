@@ -56,10 +56,15 @@ const displayProjects = _ => {
             // Assign the joined project to a project variable.
             let project = payload.project[0]
 
-            // Append project information to the page in a card.
-            let projectCard = document.createElement('div')
-            projectCard.className = 'col-sm-3 mb-3'
-            projectCard.innerHTML = `
+            axios.get('/api/categories')
+              .then(({ data: payload }) => {
+
+                let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
+
+                // Append project information to the page in a card.
+                let projectCard = document.createElement('div')
+                projectCard.className = 'col-sm-3 mb-3'
+                projectCard.innerHTML = `
                 <div class="card">
                   <div class="card-body">
                     <div class="row mb-2">
@@ -68,7 +73,7 @@ const displayProjects = _ => {
                       <h5 class="card-title">${project.projectName}</h5>
 
                       <!-- project category -->
-                      <h6 class="card-subtitle mb-2 text-muted"></h6>
+                      <h6 class="card-subtitle mb-2 text-muted">${matchedCategory[0].title}</h6>
 
                       <!-- project description, took the same code from myProjects.js  -->
                       <p class="card-text">${project.description}</p>
@@ -80,8 +85,12 @@ const displayProjects = _ => {
                     <button type="button" class="btn btn-outline-danger removeProject" data-trackid="${track.id}" id="removeProject">Remove Project</button>
                   </div>
                 </div>
-            `
-            document.getElementById('displayUserProjects').append(projectCard)
+                `
+                document.getElementById('displayUserProjects').append(projectCard)
+
+              })
+              .catch(err => console.log(err))
+
           })
           .catch(err => console.log(err))
 
