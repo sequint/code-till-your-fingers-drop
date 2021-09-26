@@ -15,6 +15,12 @@ document.addEventListener('click', event => {
 
 })
 
+document.getElementById('logOutBtn').addEventListener('click', event => {
+
+  window.location.href = './auth.html'
+
+})
+
 // Delete a project from user tracked projects.
 document.addEventListener('click', event => {
   if (event.target.classList.contains('removeProject')) {

@@ -113,6 +113,12 @@ const addTasks = projectData => {
 
 }
 
+document.getElementById('logOutBtn').addEventListener('click', event => {
+
+  window.location.href = './auth.html'
+
+})
+
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()

@@ -79,6 +79,12 @@ document.getElementById('saveChanges').addEventListener('click', event => {
 
 })
 
+document.getElementById('logOutBtn').addEventListener('click', event => {
+
+  window.location.href = './auth.html'
+
+})
+
 document.getElementById('addTask').addEventListener('click', event => {
   event.preventDefault()
 
