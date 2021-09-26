@@ -134,10 +134,11 @@ document.getElementById('saveChanges').addEventListener('click', event => {
     .then(({ data: payload }) => {
       addTasks(projectId)
       addCategoryId(categoryName)
+      loadProjectContent()
     })
     .catch(err => console.log(err))
 
-    loadProjectContent()
+  
 
 })
 
@@ -171,6 +172,9 @@ document.getElementById('addTask').addEventListener('click', event => {
 const loadProjectContent = _ => {
   // Grab project id clicked on from local storage and store into a variable.
   let projectId = JSON.parse(localStorage.getItem('myProject'))
+
+  document.getElementById('tasksLi').innerHTML = ''
+  document.getElementById('progressArea').innerHTML = ''
 
   // Get project with the id.
   axios.get(`/api/projects/${projectId}`)
@@ -219,7 +223,7 @@ const loadProjectContent = _ => {
             let nextTask = document.createElement('li')
             nextTask.innerHTML = `
             <p class="taskDescription">${task.taskDescription}</p>
-            <button type="button" class="btn btn-danger btn-sm deleteTask taskInModal">X</button>
+            <button type="button" class="btn btn-sm deleteTask taskInModal">X</button>
             `
 
             // Append new task to the task list.
