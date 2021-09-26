@@ -92,7 +92,7 @@ const loadProjectContent = _ => {
         .catch(err => console.log(err))
 
       document.getElementById('description').textContent = project.description
-      document.getElementById('startDate').textContent = project.startDate
+      document.getElementById('startDate').textContent = `Start Date: ${project.startDate}`
       
       let progressBar = document.createElement('div')
       progressBar.className = 'col'
