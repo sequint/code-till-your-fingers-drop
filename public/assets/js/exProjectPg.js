@@ -129,8 +129,10 @@ const loadProjectContent = _ => {
       `
       document.getElementById('progressArea').append(progressBar)
 
+      console.log(project)
       axios.get(`/api/categories/${project.categoryId}`)
         .then(({ data: payload }) => {
+          console.log(payload.category)
           document.getElementById('modalProjectCat').value = payload.category[0].title
         })
         .catch(err => console.log(err))
