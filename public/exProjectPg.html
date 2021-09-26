@@ -73,7 +73,7 @@
     <div class="row">
 
       <!-- tab title -->
-      <div class="col tabTitle" id="myIndProjTitle"></div>
+      <div class="col tabTitle">My Projects</div>
 
     </div>
 
@@ -89,28 +89,43 @@
 
               <!-- project title & description-->
               <div class="col">
-                <p class="card-text" id="description"></p>
+                <h5 class="card-title" id="myIndProjTitle"></h5>
+                <!-- project category, needs an id to display category -->
+                <h6 class="card-subtitle mb-2 text-muted" id="myIndProjCategory"></h6>
               </div>
 
-              <!-- calendar icon and project start & end dates-->
-              <div class="col">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                  class="bi bi-calendar-week" viewBox="0 0 16 16">
-                  <path
-                    d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                  <path
-                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                </svg>
-                <p class="card-text mb-0" id="startDate"></p>
-                <p class="card-text mt-0">End Date: December 1, 2021</p>
+              <div class="col-sm-6">
+                <div class=" text-wrap row">
+              
+                  <div class="col-1 calendarIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-calendar-week"
+                      viewBox="0 0 16 16">
+                      <path
+                        d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                      <path
+                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                    </svg>
+                  </div>
+              
+                  <div class="col-11 datesFS">
+                    <!-- added id steven made for start date -->
+                    <span class="card-text mb-0" id="startDate"></span>
+                    <br>
+                    <!-- needs an id to display end date -->
+                    <span class="card-text mt-0">End Date: December 1, 2021</span>
+                  </div>
+              
+                </div>
               </div>
+
+              <p class="card-text" id="description"></p>
 
             </div>
 
             <!-- project tasks -->
             <div class="row mb-2">
               <div class="col">
-                <p class="card-text mb-0">Tasks:</p>
+                <p class="card-text mt-3 mb-0 fw-bold">Tasks:</p>
                 <ul id="tasksLi"></ul>
               </div>
             </div>

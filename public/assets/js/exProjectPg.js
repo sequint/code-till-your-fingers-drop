@@ -196,6 +196,17 @@ const loadProjectContent = _ => {
       document.getElementById('modalDescription').value = project.description
 
       document.getElementById('myIndProjTitle').textContent = project.projectName
+
+      axios.get('/api/categories')
+        .then(({ data: payload }) => {
+
+          let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
+          
+          document.getElementById('myIndProjCategory').textContent = matchedCategory[0].title
+          
+        })
+        .catch(err => console.log(err))
+
       document.getElementById('description').textContent = project.description
       document.getElementById('startDate').textContent = `Start Date: ${project.startDate}`
 
