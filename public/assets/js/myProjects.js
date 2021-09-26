@@ -182,8 +182,7 @@ const displayProjects = _ => {
 
                 <!-- project link btn and delete btn -->
                 <!-- took the same code from myProjects.js for the project link btn and delete btn and added "outline" class to the btns to change the way it looks -->
-                <a href="./exProjectPg.html" class="btn btn-outline-primary seeProject" data-projectid="${project.id}">See
-                  Project</a>
+                <a href="./exProjectPg.html" class="btn btn-outline-primary seeProject" data-projectid="${project.id}">Details</a>
                 <button type="button" class="btn btn-outline-danger delete" data-projectId="${project.id}"
                   id="deleteProject">Delete
                   Project</button>
