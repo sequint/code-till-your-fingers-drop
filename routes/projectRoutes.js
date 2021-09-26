@@ -56,6 +56,7 @@ router.put('/projects/:id', passport.authenticate('jwt'), (req, res) => {
     projectName: req.body.projectName,
     description: req.body.description,
     startDate: req.body.startDate,
+    percentComplete: req.body.percentComplete,
     userId: req.user.id,
     categoryId: req.body.categoryId
   }, {
