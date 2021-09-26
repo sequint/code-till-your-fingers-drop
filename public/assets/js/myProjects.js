@@ -56,6 +56,7 @@ const renderProjects = project => {
 
 // Function assigns the categoryId to the project based on category title.
 const addCategoryId = (categoryName, projectData) => {
+  console.log(categoryName)
 
   // Check if category typed in already exists.
   axios.get('/api/categories')
@@ -68,14 +69,26 @@ const addCategoryId = (categoryName, projectData) => {
         })
           .then(({ data: payload }) => {
             // Update the specific project with the new category id.
-            axios.put(`/api/projects/${projectData.id}`, { categoryId: payload.category.id})
+            axios.put(`/api/projects/${projectData.id}`, {
+              categoryId: payload.category.id
+            }, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+              }
+            })
 
           })
           .catch(err => console.log(err))
       }
       else {
         // Update the specific project with the matched category id.
-        axios.put(`/api/projects/${projectData.id}`, { categoryId: categoryMatch.id })
+        axios.put(`/api/projects/${projectData.id}`, {
+          categoryId: categoryMatch[0].id
+        }, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        })
       }
 
     })
