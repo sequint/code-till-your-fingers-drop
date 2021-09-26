@@ -146,8 +146,6 @@ document.addEventListener('click', event => {
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
 
-  // document.getElementById('displayProjects').innerHTML = ''
-
   // Get all projects for a user.
   axios.get('/api/projects', {
     headers: {
@@ -159,56 +157,45 @@ const displayProjects = _ => {
       // Loop through projects array returned and append each project to the DOM.
       payload.project.forEach(project => {
 
-        let projectCard = document.createElement('div')
-        projectCard.className = 'row'
-        projectCard.innerHTML = `
-        <div class="col-sm-12 mt-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="row mb-2">
+        axios.get('/api/categories')
+          .then(({ data: payload }) => {
 
-                <!-- project title & description-->
-                <div class="col">
+            let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
+
+            let projectCard = document.createElement('div')
+            projectCard.className = 'col-sm-3 mb-3'
+            projectCard.innerHTML = `
+            <div class="card">
+              <div class="card-body">
+                <div class="row mb-2">
+
+                  <!-- project title, took the same code from myProjects.js -->
                   <h5 class="card-title">${project.projectName}</h5>
+
+                  <!-- project category -->
+                  <h6 class="card-subtitle mb-2 text-muted" id="categoryTitle">${matchedCategory[0].title}</h6>
+
+                  <!-- project description, took the same code from myProjects.js  -->
                   <p class="card-text">${project.description}</p>
+
                 </div>
 
-                <!-- calendar icon and project start & end dates-->
-                <div class="col">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                    class="bi bi-calendar-week" viewBox="0 0 16 16">
-                    <path
-                      d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                    <path
-                      d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                  </svg>
-                  <p class="card-text mb-0">Start Date: ${project.startDate}</p>
-                  <p class="card-text mt-0">End Date: December 1, 2021</p>
-                </div>
+                <!-- project link btn and delete btn -->
+                <!-- took the same code from myProjects.js for the project link btn and delete btn and added "outline" class to the btns to change the way it looks -->
+                <a href="./exProjectPg.html" class="btn btn-outline-primary seeProject" data-projectid="${project.id}">See
+                  Project</a>
+                <button type="button" class="btn btn-outline-danger delete" data-projectId="${project.id}"
+                  id="deleteProject">Delete
+                  Project</button>
 
               </div>
-
-              <!-- project progress and progress bar -->
-              <div class="row mb-4">
-                <div class="col">
-                  <p class="card-text mb-0">Progress:</p>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: ${project.percentComplete}%" aria-valuenow="${project.percentComplete}"
-                      aria-valuemin="0" aria-valuemax="100">${project.percentComplete}%</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- project link btn and delete btn -->
-              <a href="./exProjectPg.html" class="btn btn-primary seeProject" data-projectid="${project.id}">See Project</a>
-              <button type="button" class="btn btn-danger delete" data-projectId="${project.id}" id="deleteProject">Delete Project</button>
-
             </div>
-          </div>
-        </div>
-        `
+            `
 
-        document.getElementById('displayProjects').append(projectCard)
+            document.getElementById('displayProjects').append(projectCard)
+
+          })
+          .catch(err => console.log(err))
 
       })
       
