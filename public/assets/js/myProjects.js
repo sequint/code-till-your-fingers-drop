@@ -1,3 +1,5 @@
+
+
 // Function to render newly created project card to the page.
 const renderProjects = project => {
 
@@ -56,7 +58,6 @@ const renderProjects = project => {
 
 // Function assigns the categoryId to the project based on category title.
 const addCategoryId = (categoryName, projectData) => {
-  console.log(categoryName)
 
   // Check if category typed in already exists.
   axios.get('/api/categories')
@@ -109,7 +110,10 @@ const addTasks = projectData => {
       isComplete: false,
       projectId: projectData.id
     })
+
   })
+
+  updateProgressBar(projectData.id)
 
 }
 
@@ -150,8 +154,6 @@ document.getElementById('createProject').addEventListener('click', event => {
 document.getElementById('add-task-button').addEventListener('click', event => {
   event.preventDefault()
 
-  console.log(event.target.parentNode.children[1].value)
-
   // Element to hold the task value entered.
   let task = event.target.parentNode.children[1].value
 
@@ -170,7 +172,7 @@ document.getElementById('add-task-button').addEventListener('click', event => {
 
 document.addEventListener('click', event => {
   if (event.target.classList.contains('delete')) {
-    console.log(event.target.dataset.projectid)
+
     let id = event.target.dataset.projectid
     
     axios.delete(`/api/projects/${id}`)
