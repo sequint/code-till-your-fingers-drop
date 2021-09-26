@@ -69,11 +69,10 @@ document.addEventListener('click', event => {
 
         // Filter categories array to the matching category title.
         let suggCategory = payload.categories.filter(category => category.title === suggName)
+
         // Assign the matches id to a variable.
         let suggCategoryId = suggCategory[0].id
         
-        // Set a user variable.
-        let userId = 0
         axios.get('/api/users', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -81,12 +80,13 @@ document.addEventListener('click', event => {
         })
           .then(({ data: payload }) => {
             // Assign userId variable to the current user id.
-            userId = payload.users[0].id
+            let userId = payload.users[0].id
 
             axios.get(`/api/projects/${suggCategoryId}`)
               .then(({ data: payload }) => {
+
                 // Filter for matched projects that are not the current user's.
-                let project = payload.project.filter(project => project.userId !== userId)
+                let project = payload.project.filter(proj => proj.userId !== userId)
 
                 // If the user is already tracking a project, exlude it from the project array.
                 axios.get('/api/tracks', {
@@ -97,9 +97,9 @@ document.addEventListener('click', event => {
                   .then(({ data: payload }) => {
                     // Loop through return tracks to filter projects array.
                     payload.tracks.forEach(track => {
-                      project = project.filter(project => project.id !== track.projectId)
+                      project = project.filter(proj => proj.id !== track.projectId)
                     })
-                    console.log(project)
+
                     // Iterate through each project and display on page.
                     project.forEach(project => {
                       let projectCard = document.createElement('div')
@@ -177,7 +177,6 @@ document.addEventListener('click', event => {
     
     // Assign project id variable to the dataset value.
     let projectId = event.target.dataset.projectid
-    console.log(projectId)
 
     axios.post(`/api/tracks/`, {
       projectId: projectId
@@ -187,7 +186,7 @@ document.addEventListener('click', event => {
       }
     })
       .then(({ data: payload }) => {
-        console.log(payload.track)
+
         // Display track added message.
         document.getElementById('trackAdded').innerHTML = `
         <p>You are now tracking this project!</p>

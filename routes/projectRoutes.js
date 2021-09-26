@@ -20,7 +20,7 @@ router.get('/projects', passport.authenticate('jwt'), (req, res) => {
 // Get specific project by project id.
 router.get('/projects/:id', (req, res) => {
   Project.findAll({
-    where: { id: req.params.id }
+    where: { categoryId: req.params.id }
   })
     .then(project => res.json({
       status: 200,
