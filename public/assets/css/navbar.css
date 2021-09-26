@@ -145,3 +145,11 @@ i {
   background: white;
   cursor: pointer;
 }
+
+.calendarIcon {
+  margin-top: 2px;
+}
+
+.datesFS {
+  font-size: 13px;
+}
