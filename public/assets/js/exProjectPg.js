@@ -53,6 +53,66 @@ const addTasks = projectId => {
 
 }
 
+// Handle delete task click.
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('deleteTask')) {
+
+    let projectId = JSON.parse(localStorage.getItem('myProject'))
+
+    // Create a variable for the task.
+    let clickedTask = event.target.parentNode.children[0].textContent
+
+    // Get task id that matches the name.
+    axios.get('/api/tasks')
+      .then(({ data: payload }) => {
+        // Filter tasks array to match the clicked task.
+        let matchedTask = payload.tasks.filter(task => task.taskDescription === clickedTask)
+        console.log(matchedTask[0].taskDescription)
+
+        // Delete the task from the database using it's id.
+        axios.delete(`/api/tasks/${matchedTask[0].id}`)
+          .then(() => {
+            // Clear the task lists.
+            document.getElementById('task-list').innerHTML = ''
+            document.getElementById('tasksLi').innerHTML = ''
+
+            // Reload projects to the page.
+            axios.get(`/api/tasks/${projectId}`)
+              .then(({ data: payload }) => {
+                // Set array variable for tasks returned.
+                let tasks = payload.task
+                // Loop through tasks array and append each task to the page.
+                tasks.forEach(task => {
+
+                let taskItem = document.createElement('li')
+                taskItem.className = 'm-1'
+                taskItem.innerHTML = `
+                <p class="taskDescription">${task.taskDescription}</p>
+                <button type="button" class="btn btn-danger btn-sm deleteTask">X</button>
+                `
+
+                let nextTask = document.createElement('li')
+                nextTask.innerHTML = `
+                <p class="taskDescription">${task.taskDescription}</p>
+                <button type="button" class="btn btn-danger btn-sm deleteTask taskInModal">X</button>
+                `
+
+                // Append new task to the task list.
+                document.getElementById('task-list').append(nextTask)
+                document.getElementById('tasksLi').append(taskItem)
+
+                })
+              })
+              .catch(err => console.log(err))
+          })
+
+      })
+
+  }
+
+})
+
 // Handle change project click.
 document.getElementById('saveChanges').addEventListener('click', event => {
   event.preventDefault()
@@ -77,6 +137,8 @@ document.getElementById('saveChanges').addEventListener('click', event => {
     })
     .catch(err => console.log(err))
 
+    loadProjectContent()
+
 })
 
 document.getElementById('logOutBtn').addEventListener('click', event => {
@@ -91,7 +153,6 @@ document.getElementById('addTask').addEventListener('click', event => {
   console.log('in click')
   // Element to hold the task value entered.
   let task = event.target.parentNode.children[1].value
-  console.log(task)
 
   // Push new task value into the tasks array.
   tasks.push(task)
@@ -99,7 +160,7 @@ document.getElementById('addTask').addEventListener('click', event => {
   // Create element to hold task html and append to the task list.
   let nextTask = document.createElement('li')
   nextTask.innerHTML = `
-  <p>${task}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+  <p>${task}<button type="button" class="btn btn-danger btn-sm deleteTask">X</button></p>
   `
   document.getElementById('task-list').append(nextTask)
   document.getElementById('projectTasks').value = ''
@@ -135,10 +196,8 @@ const loadProjectContent = _ => {
       `
       document.getElementById('progressArea').append(progressBar)
 
-      console.log(project)
       axios.get(`/api/categories/${project.categoryId}`)
         .then(({ data: payload }) => {
-          console.log(payload.category)
           document.getElementById('modalProjectCat').value = payload.category[0].title
         })
         .catch(err => console.log(err))
@@ -153,12 +212,14 @@ const loadProjectContent = _ => {
             let taskItem = document.createElement('li')
             taskItem.className = 'm-1'
             taskItem.innerHTML = `
-            <p>${task.taskDescription}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+            <p class="taskDescription">${task.taskDescription}</p>
+            <button type="button" class="btn btn-danger btn-sm deleteTask">X</button>
             `
 
             let nextTask = document.createElement('li')
             nextTask.innerHTML = `
-            <p>${task.taskDescription}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+            <p class="taskDescription">${task.taskDescription}</p>
+            <button type="button" class="btn btn-danger btn-sm deleteTask taskInModal">X</button>
             `
 
             // Append new task to the task list.
