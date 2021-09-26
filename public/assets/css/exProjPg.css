@@ -2,6 +2,28 @@
   display: inline;
 }
 
-.deleteTask {
+.completeTask {
+  color: green;
+  background-color: white;
+  height: 35px;
+  border: green solid 2px;
   margin-left: 10px;
+}
+
+.completeTask:hover {
+  color: white;
+  background-color: green;
+}
+
+.deleteTask {
+  color: red;
+  background-color: white;
+  height: 35px;
+  border: red solid 2px;
+  margin-left: 5px;
+}
+
+.deleteTask:hover {
+  color: white;
+  background-color: red;
 }
