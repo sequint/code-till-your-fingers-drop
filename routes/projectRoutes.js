@@ -17,10 +17,25 @@ router.get('/projects', passport.authenticate('jwt'), (req, res) => {
     }))
 })
 
-// Get specific project by project id.
-router.get('/projects/:id', (req, res) => {
+// Get specific project by category id.
+router.get('/projects/searchProjectId/:projectId', (req, res) => {
   Project.findAll({
-    where: { id: req.params.id }
+    where: { id: req.params.projectId }
+  })
+    .then(project => res.json({
+      status: 200,
+      project: project
+    }))
+    .catch(err => res.json({
+      status: 400,
+      err: err
+    }))
+})
+
+// Get specific project by category id.
+router.get('/projects/searchCategoryId/:categoryId', (req, res) => {
+  Project.findAll({
+    where: { categoryId: req.params.categoryId }
   })
     .then(project => res.json({
       status: 200,

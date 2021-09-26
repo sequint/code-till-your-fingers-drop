@@ -30,7 +30,7 @@ document.addEventListener('click', event => {
     axios.delete(`/api/tracks/${id}`)
       .then(() => {
         document.getElementById('displayUserProjects').innerHTML = ''
-        displayProjects()
+        window.location.href = './trackProjects.html'
       })
       .catch(err => console.log(err))
   }
@@ -49,8 +49,9 @@ const displayProjects = _ => {
 
       // Loop through user tracks and find the joined project, then append project to the page.
       payload.tracks.forEach(track => {
+        console.log(track.projectId)
 
-        axios.get(`/api/projects/${track.projectId}`)
+        axios.get(`/api/projects/searchProjectId/${track.projectId}`)
           .then(({ data: payload}) => {
             // Assign the joined project to a project variable.
             let project = payload.project[0]
