@@ -45,6 +45,12 @@ searchBar.addEventListener('keyup', event => {
 
 })
 
+document.getElementById('logOutBtn').addEventListener('click', event => {
+
+  window.location.href = './auth.html'
+
+})
+
 document.addEventListener('click', event => {
 
   if (event.target.classList.contains('suggestion')) {
