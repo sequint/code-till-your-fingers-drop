@@ -53,6 +53,37 @@ const addTasks = projectId => {
 
 }
 
+// Handle complete task click.
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('completeTask')) {
+
+    let projectId = JSON.parse(localStorage.getItem('myProject'))
+
+    // Create a variable for the task.
+    let clickedTask = event.target.parentNode.children[0].textContent
+
+    // Get task id that matches the name.
+    axios.get('/api/tasks')
+      .then(({ data: payload }) => {
+
+        // Filter tasks array to match the clicked task.
+        let matchedTask = payload.tasks.filter(task => task.taskDescription === clickedTask)
+        console.log(matchedTask)
+        
+        axios.put(`/api/tasks/${matchedTask[0].id}`, { isComplete: true })
+          .then(() => {
+            updateProgressBar(projectId)
+            window.location.href = './exProjectPg.html'
+          })
+
+      })
+      .catch(err => console.log(err))
+
+  }
+
+})
+
 // Handle delete task click.
 document.addEventListener('click', event => {
 
@@ -68,44 +99,19 @@ document.addEventListener('click', event => {
       .then(({ data: payload }) => {
         // Filter tasks array to match the clicked task.
         let matchedTask = payload.tasks.filter(task => task.taskDescription === clickedTask)
-        console.log(matchedTask[0].taskDescription)
 
         // Delete the task from the database using it's id.
         axios.delete(`/api/tasks/${matchedTask[0].id}`)
           .then(() => {
+            
             // Clear the task lists.
             document.getElementById('task-list').innerHTML = ''
             document.getElementById('tasksLi').innerHTML = ''
 
-            // Reload projects to the page.
-            axios.get(`/api/tasks/${projectId}`)
-              .then(({ data: payload }) => {
-                // Set array variable for tasks returned.
-                let tasks = payload.task
-                // Loop through tasks array and append each task to the page.
-                tasks.forEach(task => {
+            updateProgressBar(projectId)
 
-                let taskItem = document.createElement('li')
-                taskItem.className = 'm-1'
-                taskItem.innerHTML = `
-                <p class="taskDescription">${task.taskDescription}</p>
-                <button type="button" class="btn btn-sm completeTask">Complete</button>
-                <button type="button" class="btn btn-sm deleteTask">Delete</button>
-                `
+            window.location.href = './exProjectPg.html'
 
-                let nextTask = document.createElement('li')
-                nextTask.innerHTML = `
-                <p class="taskDescription">${task.taskDescription}</p>
-                <button type="button" class="btn btn-sm deleteTask taskInModal">Delete</button>
-                `
-
-                // Append new task to the task list.
-                document.getElementById('task-list').append(nextTask)
-                document.getElementById('tasksLi').append(taskItem)
-
-                })
-              })
-              .catch(err => console.log(err))
           })
 
       })
