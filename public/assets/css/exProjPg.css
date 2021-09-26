@@ -3,10 +3,5 @@
 }
 
 .deleteTask {
-  float: right;
-  margin-right: 900px;
-}
-
-.taskInModal {
-  margin-right: 0px;
+  margin-left: 10px;
 }
