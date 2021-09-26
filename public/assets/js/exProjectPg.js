@@ -58,9 +58,10 @@ document.addEventListener('click', event => {
 
   if (event.target.classList.contains('deleteTask')) {
 
+    let projectId = JSON.parse(localStorage.getItem('myProject'))
+
     // Create a variable for the task.
     let clickedTask = event.target.parentNode.children[0].textContent
-    console.log(clickedTask)
 
     // Get task id that matches the name.
     axios.get('/api/tasks')
@@ -71,7 +72,40 @@ document.addEventListener('click', event => {
 
         // Delete the task from the database using it's id.
         axios.delete(`/api/tasks/${matchedTask[0].id}`)
-          .then(() => event.target.parentNode.remove())
+          .then(() => {
+            // Clear the task lists.
+            document.getElementById('task-list').innerHTML = ''
+            document.getElementById('tasksLi').innerHTML = ''
+
+            // Reload projects to the page.
+            axios.get(`/api/tasks/${projectId}`)
+              .then(({ data: payload }) => {
+                // Set array variable for tasks returned.
+                let tasks = payload.task
+                // Loop through tasks array and append each task to the page.
+                tasks.forEach(task => {
+
+                let taskItem = document.createElement('li')
+                taskItem.className = 'm-1'
+                taskItem.innerHTML = `
+                <p class="taskDescription">${task.taskDescription}</p>
+                <button type="button" class="btn btn-danger btn-sm deleteTask">X</button>
+                `
+
+                let nextTask = document.createElement('li')
+                nextTask.innerHTML = `
+                <p class="taskDescription">${task.taskDescription}</p>
+                <button type="button" class="btn btn-danger btn-sm deleteTask taskInModal">X</button>
+                `
+
+                // Append new task to the task list.
+                document.getElementById('task-list').append(nextTask)
+                document.getElementById('tasksLi').append(taskItem)
+
+                })
+              })
+              .catch(err => console.log(err))
+          })
 
       })
 
