@@ -5,3 +5,11 @@
 .deleteTask {
   margin-left: 10px;
 }
+
+.calendarIcon {
+  margin-top: 2px;
+}
+
+.datesFS {
+  font-size: 13px;
+}
