@@ -5,7 +5,7 @@ document.addEventListener('click', event => {
 
     let id = JSON.parse(localStorage.getItem('myProject'))
 
-    axios.delete(`/api/projects/${id}`)
+    axios.delete(`/api/projects/searchProjectId/${id}`)
       .then(() => {
         window.location.href = './myProjects.html'
       })
@@ -24,7 +24,7 @@ const addCategoryId = categoryName => {
       let categoryMatch = payload.categories.filter(category => category.title === categoryName)
 
       // Update the specific project with the matched category id.
-      axios.put(`/api/projects/${projectId}`, {
+      axios.put(`/api/projects/searchProjectId/${projectId}`, {
         categoryId: categoryMatch[0].id
       }, {
         headers: {
@@ -130,7 +130,7 @@ document.getElementById('saveChanges').addEventListener('click', event => {
   let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
 
   // Create a post axios request to send new project information to the database.
-  axios.put(`/api/projects/${projectId}`, {
+  axios.put(`/api/projects/searchProjectId/${projectId}`, {
     projectName: event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value,
     description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value
   }, {
@@ -186,7 +186,7 @@ const loadProjectContent = _ => {
   document.getElementById('progressArea').innerHTML = ''
 
   // Get project with the id.
-  axios.get(`/api/projects/${projectId}`)
+  axios.get(`/api/projects/searchProjectId/${projectId}`)
     .then(({ data: payload }) => {
       // Set project variable.
       let project = payload.project[0]
