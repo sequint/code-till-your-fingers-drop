@@ -103,7 +103,6 @@ const addTasks = projectData => {
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
-  console.log(event.target.parentNode.parentNode.children[1].children[0].children[5])
 
   // Create data variable using values from form inputs.
   let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
@@ -131,7 +130,6 @@ document.getElementById('createProject').addEventListener('click', event => {
 
 document.getElementById('add-task-button').addEventListener('click', event => {
   event.preventDefault()
-  console.log('in click')
 
   console.log(event.target.parentNode.children[1].value)
 
@@ -163,6 +161,23 @@ document.addEventListener('click', event => {
       })
       .catch(err => console.log(err))
   }
+})
+
+document.addEventListener('click', event => {
+
+  if (event.target.classList.contains('seeProject')) {
+
+    // Set variable for project id clicked on.
+    console.log(event.target.dataset.projectid)
+    let projectId = event.target.dataset.projectid
+
+    localStorage.setItem('myProject', projectId)
+
+    // Go to individual tracked project window.
+    window.location.href = './exprojectPg.html'
+
+  }
+
 })
 
 // Function that gets projects of user and displays them in the DOM as cards.
@@ -220,7 +235,7 @@ const displayProjects = _ => {
               </div>
 
               <!-- project link btn and delete btn -->
-              <a href="./exProjectPg.html" class="btn btn-primary">See Project</a>
+              <a href="./exProjectPg.html" class="btn btn-primary seeProject" data-projectid="${project.id}">See Project</a>
               <button type="button" class="btn btn-danger delete" data-projectId="${project.id}" id="deleteProject">Delete Project</button>
 
             </div>

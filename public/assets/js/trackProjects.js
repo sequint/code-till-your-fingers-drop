@@ -3,7 +3,6 @@ document.addEventListener('click', event => {
   if (event.target.classList.contains('getDetails')) {
 
     // Set variable for project id clicked on.
-    console.log(event.target.dataset.projectid)
     let projectId = event.target.dataset.projectid
     let trackId = event.target.dataset.trackid
     localStorage.setItem('trackProject', projectId)

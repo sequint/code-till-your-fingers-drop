@@ -51,8 +51,14 @@ router.post('/projects', passport.authenticate('jwt'), (req, res) => {
 })
 
 // Update a project's information.
-router.put('/projects/:id', (req, res) => {
-  Project.update(req.body, {
+router.put('/projects/:id', passport.authenticate('jwt'), (req, res) => {
+  Project.update({
+    projectName: req.body.projectName,
+    description: req.body.description,
+    startDate: req.body.startDate,
+    userId: req.user.id,
+    categoryId: req.body.categoryId
+  }, {
     where: { id: req.params.id }
   })
     .then(project => res.json({
