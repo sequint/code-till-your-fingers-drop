@@ -1,0 +1,90 @@
+<!-- page content -->
+<div class="container-fluid pageContent">
+
+  <!-- page content header -->
+  <div class="row">
+
+    <!-- tab title -->
+    <div class="col tabTitle">
+      Tracked Projects
+    </div>
+  </div>
+
+  <!-- div for displaying user's project -->
+  <!-- i think the div should be displayUserProject, since this pg will only display 1 project and bc you already have an displayUserProjects id but its in the trackProjects html imo but for now i just wrote the same id you had in exTrackPro html -->
+  <div class="row" id="displayUserProjects">
+
+    <!-- track user's project card-->
+    <div class="col-sm-12 mb-3">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row mb-2">
+
+            <!-- project title & category-->
+            <div class="col-sm-6">
+              <!-- user's project title, added the id steven already made-->
+              <h5 class="card-title" id="myProTitle"></h5>
+              <!-- user's project category, needs an id to display category -->
+              <h6 class="card-subtitle mb-2 text-muted"></h6>
+            </div>
+
+            <!-- project calendar icon, start & end dates -->
+            <div class="col-sm-6">
+              <div class=" text-wrap row">
+
+                <div class="col-1 calendarIcon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor"
+                    class="bi bi-calendar-week" viewBox="0 0 16 16">
+                    <path
+                      d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                    <path
+                      d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                  </svg>
+                </div>
+
+                <div class="col-11 datesFS">
+                  <!-- added id steven made for start date -->
+                  <span class="card-text mb-0" id="startDate"></span>
+                  <br>
+                  <!-- needs an id to display end date -->
+                  <span class="card-text mt-0">End Date: December 1, 2021</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- project description, added id steven already made for project description -->
+            <p class="card-text" id="description"></p>
+
+          </div>
+
+          <!-- project tasks -->
+          <div class="row mb-2">
+            <div class="col">
+              <p class="card-text mb-0">Tasks:</p>
+              <!-- added id steven made to display tasks, tasks shouldn't display the checkmark & delete task btns -->
+              <ul class="mb-0" id="tasksLi"></ul>
+            </div>
+          </div>
+
+          <!-- project progress and progress bar, added id steven already made to display progress bar -->
+          <div class="row mb-3" id="progressArea"></div>
+
+          <!-- remove user's project btn -->
+          <!-- the comment modal and remove btn will be the same as the one we already have on our exTrackPro -->
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- div to display comments -->
+  <!-- kept all comment ids the same as exTrackPro html -->
+  <div class="row mt-2" id="displayComments">
+    <h5>Comments:</h5>
+    <div class="col-sm-12" id="comments"></div>
+  </div>
+
+</div>
