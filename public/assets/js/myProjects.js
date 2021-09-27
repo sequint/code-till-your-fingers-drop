@@ -5,9 +5,9 @@ const addCategoryId = (categoryName, projectData) => {
   axios.get('/api/categories')
     .then(({ data: payload }) => {
       let categoryMatch = payload.categories.filter(category => category.title === categoryName)
+      console.log(payload)
+      if (categoryMatch.length === 0) {
 
-      if (!categoryMatch.length) {
-        console.log('in not match')
         // Post new category
         axios.post('/api/categories', {
           title: categoryName
@@ -114,7 +114,7 @@ document.getElementById('add-task-button').addEventListener('click', event => {
   // Create element to hold task html and append to the task list.
   let nextTask = document.createElement('li')
   nextTask.innerHTML = `
-  <p class="taskDescription">${task.taskDescription}</p>
+  <p class="taskDescription">${task}</p>
   `
   document.getElementById('task-list').append(nextTask)
   document.getElementById('projectTasks').value = ''
@@ -154,7 +154,6 @@ document.addEventListener('click', event => {
 
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
-  console.log('in load')
 
   axios.get('/api/users', {
     headers: {
@@ -178,7 +177,7 @@ const displayProjects = _ => {
 
         axios.get('/api/categories')
           .then(({ data: payload }) => {
-
+            console.log(project)
             let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
             console.log(matchedCategory[0].title)
 

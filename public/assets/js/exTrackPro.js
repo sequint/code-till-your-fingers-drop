@@ -21,19 +21,21 @@ document.addEventListener('click', event => {
       .then(({ data: payload }) => {
         // Create comment variable to hold the object.
         let comment = payload.comment
+        console.log(comment)
 
         axios.get(`/api/users/${comment.commentorId}`)
           .then(({ data: payload }) => {
             // Assign user data a variable.
             let user = payload.user[0]
+            console.log(comment)
 
             // Append comment to the page.
             let commentCard = document.createElement('div')
             commentCard.className = 'card'
             commentCard.innerHTML = `
             <div class="card-body">
-              <h6 class="card-title">${user.username}</h6>
-              <p class="card-text">${comment.content}</p>
+              <h6 class="card-title text-black">${user.username}</h6>
+              <p class="card-text text-black">${comment.content}</p>
             </div>
             `
             document.getElementById('comments').append(commentCard)
@@ -144,8 +146,8 @@ const loadProjectContent = _ => {
                 commentCard.className = 'card'
                 commentCard.innerHTML = `
             <div class="card-body">
-              <h6 class="card-title">${user.username}</h6>
-              <p class="card-text">${comment.content}</p>
+              <h6 class="card-title text-black">${user.username}</h6>
+              <p class="card-text text-black">${comment.content}</p>
             </div>
             `
                 document.getElementById('comments').append(commentCard)
