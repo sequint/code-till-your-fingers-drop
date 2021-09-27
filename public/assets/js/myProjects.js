@@ -1,16 +1,20 @@
 // Function assigns the categoryId to the project based on category title.
 const addCategoryId = (categoryName, projectData) => {
+  console.log('in function')
 
   // Check if category typed in already exists.
   axios.get('/api/categories')
     .then(({ data: payload }) => {
       let categoryMatch = payload.categories.filter(category => category.title === categoryName)
+
       if (!categoryMatch.length) {
+        console.log('in not match')
         // Post new category
         axios.post('/api/categories', {
           title: categoryName
         })
           .then(({ data: payload }) => {
+            // let categoryId = payload.category.id
             // Update the specific project with the new category id.
             axios.put(`/api/projects/${projectData.id}`, {
               categoryId: payload.category.id
@@ -145,6 +149,7 @@ document.addEventListener('click', event => {
 
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
+  console.log('in load')
 
   axios.get('/api/users', {
     headers: {
@@ -170,6 +175,7 @@ const displayProjects = _ => {
           .then(({ data: payload }) => {
 
             let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
+            console.log(matchedCategory[0].title)
 
             let projectCard = document.createElement('div')
             projectCard.className = 'col-sm-3 mb-3'
