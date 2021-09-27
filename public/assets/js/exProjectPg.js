@@ -5,7 +5,7 @@ document.addEventListener('click', event => {
 
     let id = JSON.parse(localStorage.getItem('myProject'))
 
-    axios.delete(`/api/projects/searchProjectId/${id}`)
+    axios.delete(`/api/projects/${id}`)
       .then(() => {
         window.location.href = './myProjects.html'
       })
