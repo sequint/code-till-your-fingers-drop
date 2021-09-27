@@ -5,9 +5,9 @@ const addCategoryId = (categoryName, projectData) => {
   axios.get('/api/categories')
     .then(({ data: payload }) => {
       let categoryMatch = payload.categories.filter(category => category.title === categoryName)
+      console.log(payload)
+      if (categoryMatch.length === 0) {
 
-      if (!categoryMatch.length) {
-        console.log('in not match')
         // Post new category
         axios.post('/api/categories', {
           title: categoryName
@@ -177,8 +177,9 @@ const displayProjects = _ => {
 
         axios.get('/api/categories')
           .then(({ data: payload }) => {
-
+            console.log(project)
             let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
+            console.log(matchedCategory[0].title)
 
             let projectCard = document.createElement('div')
             projectCard.className = 'col-sm-3 mb-3'

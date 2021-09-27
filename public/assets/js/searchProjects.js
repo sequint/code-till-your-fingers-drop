@@ -123,7 +123,7 @@ document.addEventListener('click', event => {
                             </div>
 
                             <!-- project link btn and delete btn -->
-                            <div id="trackAdded">
+                            <div id="${project.id}-trackAdded">
                               <button type="button" class="btn btn-primary trackProject" data-projectid="${project.id}" id="trackProject">Track Project</button>
                             </div>
 
@@ -167,7 +167,7 @@ document.addEventListener('click', event => {
       .then(({ data: payload }) => {
 
         // Display track added message.
-        document.getElementById('trackAdded').innerHTML = `
+        document.getElementById(`${projectId}-trackAdded`).innerHTML = `
         <p>You are now tracking this project!</p>
         `
 
