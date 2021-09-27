@@ -154,7 +154,6 @@ document.addEventListener('click', event => {
 
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
-  console.log('in load')
 
   axios.get('/api/users', {
     headers: {
@@ -180,7 +179,6 @@ const displayProjects = _ => {
           .then(({ data: payload }) => {
 
             let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
-            console.log(matchedCategory[0].title)
 
             let projectCard = document.createElement('div')
             projectCard.className = 'col-sm-3 mb-3'
