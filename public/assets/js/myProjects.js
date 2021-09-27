@@ -1,6 +1,5 @@
 // Function assigns the categoryId to the project based on category title.
 const addCategoryId = (categoryName, projectData) => {
-  console.log('in function')
 
   // Check if category typed in already exists.
   axios.get('/api/categories')
@@ -14,15 +13,21 @@ const addCategoryId = (categoryName, projectData) => {
           title: categoryName
         })
           .then(({ data: payload }) => {
-            // let categoryId = payload.category.id
+
+            let categoryId = payload.category.id
+            console.log(categoryId)
+            console.log(projectData.id)
+
             // Update the specific project with the new category id.
             axios.put(`/api/projects/${projectData.id}`, {
-              categoryId: payload.category.id
+              categoryId: categoryId
             }, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
               }
             })
+              .then(({ data: payload }) => console.log(payload))
+              .catch(err => console.log(err))
 
           })
           .catch(err => console.log(err))
@@ -109,7 +114,7 @@ document.getElementById('add-task-button').addEventListener('click', event => {
   // Create element to hold task html and append to the task list.
   let nextTask = document.createElement('li')
   nextTask.innerHTML = `
-  <p>${task}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+  <p class="taskDescription">${task.taskDescription}</p>
   `
   document.getElementById('task-list').append(nextTask)
   document.getElementById('projectTasks').value = ''
