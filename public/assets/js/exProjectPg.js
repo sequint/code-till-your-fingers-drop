@@ -24,7 +24,7 @@ const addCategoryId = categoryName => {
       let categoryMatch = payload.categories.filter(category => category.title === categoryName)
 
       // Update the specific project with the matched category id.
-      axios.put(`/api/projects/searchProjectId/${projectId}`, {
+      axios.put(`/api/projects/${projectId}`, {
         categoryId: categoryMatch[0].id
       }, {
         headers: {
@@ -170,7 +170,6 @@ document.getElementById('addTask').addEventListener('click', event => {
   let nextTask = document.createElement('li')
   nextTask.innerHTML = `
   <p class="taskDescription">${task}</p>
-  <button type="button" class="btn btn-sm deleteTask">Delete</button>
   `
   document.getElementById('task-list').append(nextTask)
   document.getElementById('projectTasks').value = ''
@@ -246,7 +245,6 @@ const loadProjectContent = _ => {
               let nextTask = document.createElement('li')
               nextTask.innerHTML = `
             <p class="taskDescription">${task.taskDescription}</p>
-            <button type="button" class="btn btn-sm deleteTask">Delete</button>
             `
 
             // Append new task to the task list.

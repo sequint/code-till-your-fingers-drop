@@ -114,7 +114,7 @@ document.getElementById('add-task-button').addEventListener('click', event => {
   // Create element to hold task html and append to the task list.
   let nextTask = document.createElement('li')
   nextTask.innerHTML = `
-  <p>${task}<button type="button" class="btn btn-danger btn-sm">X</button></p>
+  <p class="taskDescription">${task.taskDescription}</p>
   `
   document.getElementById('task-list').append(nextTask)
   document.getElementById('projectTasks').value = ''
