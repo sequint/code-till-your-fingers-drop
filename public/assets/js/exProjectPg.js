@@ -69,7 +69,6 @@ document.addEventListener('click', event => {
 
         // Filter tasks array to match the clicked task.
         let matchedTask = payload.tasks.filter(task => task.taskDescription === clickedTask)
-        console.log(matchedTask)
         
         axios.put(`/api/tasks/${matchedTask[0].id}`, { isComplete: true })
           .then(() => {
@@ -234,16 +233,18 @@ const loadProjectContent = _ => {
           // Loop through tasks array and append each task to the page.
           tasks.forEach(task => {
 
-            let taskItem = document.createElement('li')
-            taskItem.className = 'm-1'
-            taskItem.innerHTML = `
+            if (!task.isComplete) {
+
+              let taskItem = document.createElement('li')
+              taskItem.className = 'm-1'
+              taskItem.innerHTML = `
             <p class="taskDescription">${task.taskDescription}</p>
             <button type="button" class="btn btn-sm completeTask">Complete</button>
             <button type="button" class="btn btn-sm deleteTask">Delete</button>
             `
 
-            let nextTask = document.createElement('li')
-            nextTask.innerHTML = `
+              let nextTask = document.createElement('li')
+              nextTask.innerHTML = `
             <p class="taskDescription">${task.taskDescription}</p>
             <button type="button" class="btn btn-sm deleteTask">Delete</button>
             `
@@ -251,6 +252,8 @@ const loadProjectContent = _ => {
             // Append new task to the task list.
             document.getElementById('task-list').append(nextTask)
             document.getElementById('tasksLi').append(taskItem)
+
+            }
 
           })
         })
