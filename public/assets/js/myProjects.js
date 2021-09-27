@@ -146,6 +146,15 @@ document.addEventListener('click', event => {
 // Function that gets projects of user and displays them in the DOM as cards.
 const displayProjects = _ => {
 
+  axios.get('/api/users', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+    .then(({ data: payload }) => {
+      document.getElementById('userProjTitle').textContent = `My Projects - ${payload.users[0].username}`
+    })
+
   // Get all projects for a user.
   axios.get('/api/projects', {
     headers: {
