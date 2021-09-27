@@ -1,6 +1,5 @@
 // Function assigns the categoryId to the project based on category title.
 const addCategoryId = (categoryName, projectData) => {
-  console.log('in function')
 
   // Check if category typed in already exists.
   axios.get('/api/categories')
@@ -14,8 +13,9 @@ const addCategoryId = (categoryName, projectData) => {
           title: categoryName
         })
           .then(({ data: payload }) => {
-            console.log(payload.category.id)
+
             let categoryId = payload.category.id
+
             // Update the specific project with the new category id.
             axios.put(`/api/projects/${projectData.id}`, {
               categoryId: categoryId
@@ -90,7 +90,7 @@ document.getElementById('createProject').addEventListener('click', event => {
     .then(({ data: payload }) => {
       addTasks(payload.project)
       addCategoryId(categoryName, payload.project)
-      // window.location.href = './myProjects.html'
+      window.location.href = './myProjects.html'
     })
     .catch(err => console.log(err))
 
