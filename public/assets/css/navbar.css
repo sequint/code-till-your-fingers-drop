@@ -153,3 +153,9 @@ i {
 .datesFS {
   font-size: 16px;
 }
+
+#trackProBG {
+  background-image: url('https://www.ballarddesigns.com/howtodecorate/wp-content/uploads/2018/08/LEDlighting_hero.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
