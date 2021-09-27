@@ -25,7 +25,7 @@
     <div class="appDiv">
       <div class="appHeader d-flex align-items-center">
         <i class="bi bi-lightbulb" id="lightbulb"></i>
-        <div class="appName mt-1">Project 2</div>
+        <div class="appName mt-1">PUB</div>
       </div>
       <i class="bi bi-list text-center" id="toggleBtn"></i>
     </div>
@@ -87,31 +87,32 @@
 
             <div class="row mb-2">
 
-              <!-- project title & description-->
+              <!-- project title -->
               <div class="col">
                 <h5 class="card-title" id="myIndProjTitle"></h5>
-                <!-- project category, needs an id to display category -->
+                <!-- project category -->
                 <h6 class="card-subtitle mb-2 text-muted" id="myIndProjCategory"></h6>
               </div>
 
               <div class="col-sm-6">
                 <div class=" text-wrap row">
-              
+
+                  <!-- calendar icon -->
                   <div class="col-1 calendarIcon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-calendar-week"
-                      viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor"
+                      class="bi bi-calendar-week" viewBox="0 0 16 16">
                       <path
                         d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
                       <path
                         d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
                     </svg>
                   </div>
-              
-                  <div class="col-11 datesFS">
-                    <!-- added id steven made for start date -->
+
+                  <!-- start date -->
+                  <div class="col-11 d-flex align-items-center datesFS">
                     <span class="card-text mb-0" id="startDate"></span>
                   </div>
-              
+
                 </div>
               </div>
 
@@ -131,8 +132,8 @@
             <div class="row mb-4" id="progressArea"></div>
 
             <!-- edit btn and delete btn -->
-            <!-- for edit btn -> modal pop up w/ already existing info -> allow to make edits -> click 'save changes' and edited project should show on page -->
-            <button type="button" class="btn btn-outline-primary editProject" id="editProject" data-bs-toggle="modal" data-bs-target="#editModal">
+            <button type="button" class="btn btn-outline-primary editProject" id="editProject" data-bs-toggle="modal"
+              data-bs-target="#editModal">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-pencil-square" viewBox="0 0 16 16">
                 <path
@@ -175,15 +176,14 @@
                       </div>
 
                       <!-- project tasks input -->
-                  <div class="col-12 mb-3">
-                    <label for="projectTasks" class="col-form-label">Add Tasks</label>
-                    <input type="text" class="form-control task-input" id="projectTasks">
-                    <button id="addTask">+</button>
-                  </div>
+                      <div class="col-12 mb-3">
+                        <label for="projectTasks" class="col-form-label">Add Tasks</label>
+                        <input type="text" class="form-control task-input" id="projectTasks">
+                        <button id="addTask">+</button>
+                      </div>
 
                       <!-- div to display project tasks -->
                       <div class="col-12 mb-0 mt-0">
-                        <!-- example tasks (can delete) -->
                         <ul id="task-list"></ul>
                       </div>
 
@@ -192,13 +192,16 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveChanges">Save Changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveChanges">Save
+                      Changes</button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <button type="button" class="btn btn-outline-danger deleteProject" id="deleteProject">Delete Project</button>
+            <!-- delete project btn -->
+            <button type="button" class="btn btn-outline-danger deleteProject" id="deleteProject">Delete
+              Project</button>
 
           </div>
         </div>
@@ -209,9 +212,7 @@
     <!-- div for displaying comments -->
     <div class="row mt-2" id="displayComments">
       <h5>Comments:</h5>
-
       <div class="col-sm-12" id="comments"></div>
-
     </div>
 
   </div>
