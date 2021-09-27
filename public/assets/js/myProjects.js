@@ -94,13 +94,11 @@ document.getElementById('createProject').addEventListener('click', event => {
     .then(({ data: payload }) => {
       addTasks(payload.project)
       addCategoryId(categoryName, payload.project)
-      // window.location.href = './myProjects.html'
+      // window.location.href = './myProjects.html' 
     })
     .catch(err => console.log(err))
 
 })
-
-
 
 document.getElementById('add-task-button').addEventListener('click', event => {
   event.preventDefault()
