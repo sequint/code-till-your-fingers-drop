@@ -14,10 +14,11 @@ const addCategoryId = (categoryName, projectData) => {
           title: categoryName
         })
           .then(({ data: payload }) => {
-            // let categoryId = payload.category.id
+            console.log(payload.category.id)
+            let categoryId = payload.category.id
             // Update the specific project with the new category id.
             axios.put(`/api/projects/${projectData.id}`, {
-              categoryId: payload.category.id
+              categoryId: categoryId
             }, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -89,7 +90,7 @@ document.getElementById('createProject').addEventListener('click', event => {
     .then(({ data: payload }) => {
       addTasks(payload.project)
       addCategoryId(categoryName, payload.project)
-      window.location.href = './myProjects.html'
+      // window.location.href = './myProjects.html'
     })
     .catch(err => console.log(err))
 
