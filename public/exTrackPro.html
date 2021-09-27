@@ -24,7 +24,7 @@
     <div class="appDiv">
       <div class="appHeader d-flex align-items-center">
         <i class="bi bi-lightbulb" id="lightbulb"></i>
-        <div class="appName mt-1">Project 2</div>
+        <div class="appName mt-1">PUB</div>
       </div>
       <i class="bi bi-list text-center" id="toggleBtn"></i>
     </div>
@@ -65,122 +65,122 @@
 
   </div>
 
-<!-- page content -->
-    <div class="container-fluid pageContent">
+  <!-- page content -->
+  <div class="container-fluid pageContent" id="trackProBG">
 
-      <!-- page content header -->
-      <div class="row"> 
-        <!-- tab title -->
-        <div class="col tabTitle">
-          Tracked Projects
+    <!-- page content header -->
+    <div class="row">
+      <!-- tab title -->
+      <div class="col tabTitle">
+        Tracked Projects
+      </div>
+    </div>
+
+    <!-- div for displaying users projects -->
+    <div class="row" id="displayUserProjects">
+
+      <!-- project card example-->
+      <div class="col-sm-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+
+            <div class="row mb-2">
+
+              <!-- project title & description-->
+              <div class="col-sm-6">
+                <!-- user's project title -->
+                <h5 class="card-title" id="myProTitle"></h5>
+                <!-- user's project category -->
+                <h6 class="card-subtitle mb-2 text-muted" id="indTrackCategory"></h6>
+              </div>
+
+              <div class="col-sm-6">
+                <div class=" text-wrap row">
+
+                  <!-- calendar icon -->
+                  <div class="col-1 calendarIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor"
+                      class="bi bi-calendar-week" viewBox="0 0 16 16">
+                      <path
+                        d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                      <path
+                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                    </svg>
+                  </div>
+
+                  <!-- start date -->
+                  <div class="col-11 d-flex align-items-center datesFS">
+                    <span class="card-text mb-0" id="startDate"></span>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- project description -->
+              <p class="card-text" id="description"></p>
+
+            </div>
+
+            <!-- project tasks -->
+            <div class="row mb-2">
+              <div class="col">
+                <p class="card-text mb-0 mt-3 fw-bold">Tasks:</p>
+                <ul id="tasksLi"></ul>
+              </div>
+            </div>
+
+            <!-- project progress and progress bar -->
+            <div class="row mb-3" id="progressArea">
+
+            </div>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+              data-bs-target="#addCommentBtn">
+              Add Comment
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="addCommentBtn" tabindex="-1" aria-labelledby="addCommentBtn" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="addCommentBtn">Write a comment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form class="row">
+                      <div class="col-12 mb-3">
+                        <label for="userComment" class="col-form-label">Comment</label>
+                        <textarea class="form-control" id="userComment"></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary addComment" data-bs-dismiss="modal">Add
+                      Comment</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- remove user's project btn -->
+            <button type="button" class="btn btn-outline-danger removeProject">Remove Project</button>
+
+          </div>
         </div>
       </div>
 
-      <!-- div for displaying users projects -->
-      <div class="row" id="displayUserProjects">
-
-          <!-- project card example-->
-          <div class="col-sm-12 mb-3">
-            <div class="card">
-              <div class="card-body">
-
-                <div class="row mb-2">
-
-                  <!-- project title & description-->
-                  <div class="col-sm-6">
-                    <!-- user's project title, added the id steven already made-->
-                    <h5 class="card-title" id="myProTitle"></h5>
-                    <!-- user's project category, needs an id to display category -->
-                    <h6 class="card-subtitle mb-2 text-muted" id="indTrackCategory"></h6>
-                  </div>
-
-                  <!-- calendar icon and project start & end dates-->
-                  <div class="col-sm-6">
-                    <div class=" text-wrap row">
-                  
-                      <div class="col-1 calendarIcon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-calendar-week"
-                          viewBox="0 0 16 16">
-                          <path
-                            d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                          <path
-                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                        </svg>
-                      </div>
-                  
-                      <div class="col-11 datesFS">
-                        <!-- added id steven made for start date -->
-                        <span class="card-text mb-0" id="startDate"></span>
-                      </div>
-                  
-                    </div>
-                  </div>
-
-                  <!-- project description, added id steven already made for project description -->
-                  <p class="card-text" id="description"></p>
-
-                </div>
-
-                <!-- project tasks -->
-                <div class="row mb-2">
-                  <div class="col">
-                    <p class="card-text mb-0 mt-3 fw-bold">Tasks:</p>
-                    <ul id="tasksLi"></ul>
-                  </div>
-                </div>
-
-                <!-- project progress and progress bar -->
-                <div class="row mb-3" id="progressArea">
-
-                </div>
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCommentBtn">
-                  Add Comment
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="addCommentBtn" tabindex="-1" aria-labelledby="addCommentBtn"
-                  aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="addCommentBtn">Write a comment</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form class="row">
-                          <div class="col-12 mb-3">
-                            <label for="userComment" class="col-form-label">Comment</label>
-                            <textarea class="form-control" id="userComment"></textarea>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary addComment" data-bs-dismiss="modal">Add Comment</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- remove user's project btn -->
-                <button type="button" class="btn btn-outline-danger removeProject">Remove Project</button>
-
-              </div>
-            </div>
-          </div>
-
-      </div>
-
-      <!-- div to display comments -->
-      <!-- kept all comment ids the same as exTrackPro html -->
-      <div class="row mt-2" id="displayComments">
-        <h5>Comments:</h5>
-        <div class="col-sm-12" id="comments"></div>
-      </div>
-
     </div>
+
+    <!-- div to display comments -->
+    <div class="row mt-2" id="displayComments">
+      <h5>Comments:</h5>
+      <div class="col-sm-12" id="comments"></div>
+    </div>
+
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"

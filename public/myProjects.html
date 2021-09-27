@@ -25,7 +25,7 @@
     <div class="appDiv">
       <div class="appHeader d-flex align-items-center">
         <i class="bi bi-lightbulb" id="lightbulb"></i>
-        <div class="appName mt-1">Project 2</div>
+        <div class="appName mt-1">PUB</div>
       </div>
       <i class="bi bi-list text-center" id="toggleBtn"></i>
     </div>
@@ -67,13 +67,12 @@
   </div>
 
   <!-- page content -->
-  <div class="container-fluid pageContent">
+  <div class="container-fluid pageContent" id="myProBG">
 
     <!-- page content header -->
     <div class="row">
 
       <!-- tab title -->
-      <!-- needs an id to show "Username's Projects" as the header title-->
       <div class="col tabTitle" id="userProjTitle"></div>
 
       <!-- create project modal div -->
@@ -131,7 +130,7 @@
                   </div>
 
                   <!-- start date input -->
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <label for="startDate" class="col-form-label">Start Date</label>
                     <input type="date" class="form-control" id="startDate">
                   </div>
@@ -152,6 +151,7 @@
 
     </div>
 
+    <!-- div to display my projects -->
     <div class="row" id="displayProjects"></div>
 
   </div>

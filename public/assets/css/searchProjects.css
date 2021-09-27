@@ -4,9 +4,13 @@
 }
 
 body {
-  background: #6d7b98;
+  /* background: #6d7b98; */
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
+  background-image: url('https://www.teahub.io/photos/full/36-361124_light-bulb-aesthetic.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .wrapper {
