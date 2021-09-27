@@ -79,7 +79,11 @@ const loadProjectContent = _ => {
       // Set project variable.
       let project = payload.project[0]
 
-      document.getElementById('myProTitle').textContent = project.projectName
+      axios.get(`/api/users/${project.userId}`)
+        .then(({ data: payload }) => {
+          document.getElementById('myProTitle').textContent = `${project.projectName} - ${payload.user[0].username}`
+        })
+        .catch(err => console.log(err))
 
       axios.get('/api/categories')
         .then(({ data: payload }) => {
