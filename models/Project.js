@@ -7,11 +7,11 @@ class Project extends Model {}
 // Create a date variable using day, month, and year joined in a string.
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var yyyy = today.getFullYear();
+var mm = String(today.getMonth() + 1).padStart(2, '0')
+var yyyy = today.getFullYear()
 
 // Re-assign today to be full date.
-today = mm + '/' + dd + '/' + yyyy;
+today = mm + '/' + dd + '/' + yyyy
 
 Project.init({
   id: {
