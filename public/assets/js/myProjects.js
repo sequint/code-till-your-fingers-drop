@@ -19,7 +19,7 @@ document.getElementById('createProject').addEventListener('click', event => {
   })
     .then(({ data: payload }) => {
       console.log('Create success!')
-      // window.location.href = './myProjects.html' 
+      window.location.href = './myProjects.html' 
     })
     .catch(err => console.log(err))
 

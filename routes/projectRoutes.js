@@ -47,7 +47,7 @@ router.get('/projects/searchCategoryId/:categoryId', (req, res) => {
     }))
 })
 
-// Create a new project with a new category.
+// Create a new project.
 router.post('/projects', passport.authenticate('jwt'), (req, res) => {
 
   Category.findAll({
