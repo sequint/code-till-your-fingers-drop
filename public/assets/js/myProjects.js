@@ -78,22 +78,20 @@ document.getElementById('logOutBtn').addEventListener('click', event => {
 document.getElementById('createProject').addEventListener('click', event => {
   event.preventDefault()
 
-  // Create data variable using values from form inputs.
-  let categoryName = event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value
-  let tasks = event.target.parentNode.parentNode.children[1].children[0].children[3].children[1].value
   // Create a post axios request to send new project information to the database.
   axios.post('/api/projects', {
+    categoryTitle: event.target.parentNode.parentNode.children[1].children[0].children[2].children[1].value,
     projectName: event.target.parentNode.parentNode.children[1].children[0].children[0].children[1].value,
     description: event.target.parentNode.parentNode.children[1].children[0].children[1].children[1].value,
-    startDate: event.target.parentNode.parentNode.children[1].children[0].children[5].children[0].value
+    startDate: event.target.parentNode.parentNode.children[1].children[0].children[5].children[0].value,
+    tasks: tasks
   }, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   })
     .then(({ data: payload }) => {
-      addTasks(payload.project)
-      addCategoryId(categoryName, payload.project)
+      console.log('Create success!')
       // window.location.href = './myProjects.html' 
     })
     .catch(err => console.log(err))
@@ -107,7 +105,7 @@ document.getElementById('add-task-button').addEventListener('click', event => {
   let task = event.target.parentNode.children[1].value
 
   // Push new task value into the tasks array.
-  tasks.push(task)
+  tasks.push({ taskDescription: task })
 
   // Create element to hold task html and append to the task list.
   let nextTask = document.createElement('li')
@@ -175,9 +173,8 @@ const displayProjects = _ => {
 
         axios.get('/api/categories')
           .then(({ data: payload }) => {
-            console.log(project)
+
             let matchedCategory = payload.categories.filter(category => category.id === project.categoryId)
-            console.log(matchedCategory[0].title)
 
             let projectCard = document.createElement('div')
             projectCard.className = 'col-sm-3 mb-3'
