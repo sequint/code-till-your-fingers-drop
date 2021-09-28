@@ -17,6 +17,7 @@ Other users can comment on those tasks to help them out and follow the project i
   - npm i express
   - npm i mysql2
   - npm i sequelize
+  - npm i predictionary
 
 ## License
 
