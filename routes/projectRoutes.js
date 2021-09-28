@@ -48,7 +48,7 @@ router.get('/projects/searchCategoryId/:categoryId', (req, res) => {
 })
 
 // Create a new project with a new category.
-router.post('/projects', (req, res) => {
+router.post('/projects', passport.authenticate('jwt'), (req, res) => {
 
   Category.findAll({
     where: { title: req.body.categoryTitle }
@@ -67,7 +67,7 @@ router.post('/projects', (req, res) => {
             projectName: req.body.projectName,
             description: req.body.description,
             startDate: req.body.startDate,
-            // userId: req.user.id,
+            userId: req.user.id,
             categoryId: category.id
           })
             .then(project => {
@@ -112,11 +112,10 @@ router.post('/projects', (req, res) => {
         projectName: req.body.projectName,
         description: req.body.description,
         startDate: req.body.startDate,
-        // userId: req.user.id,
+        userId: req.user.id,
         categoryId: category[0].id
       })
         .then(project => {
-          console.log(project)
 
           // Iterate through the incoming task array and create each to task associated to the project.
           req.body.tasks.forEach(task => {
