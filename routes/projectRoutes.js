@@ -47,95 +47,76 @@ router.get('/projects/searchCategoryId/:categoryId', (req, res) => {
     }))
 })
 
-// Create a new project.
-router.post('/projects', passport.authenticate('jwt'), (req, res) => {
-  Project.create({
-    projectName: req.body.projectName,
-    description: req.body.description,
-    startDate: req.body.startDate,
-    userId: req.user.id
-  })
-    .then(project => res.json({
-      status: 200,
-      project: project
-    }))
-    .catch(err => res.json({
-      status: 400,
-      err: err
-    }))
-})
-
 // Create a new project with a new category.
-router.post('/projects/newCategory', passport.authenticate('jwt'), (req, res) => {
+router.post('/projects', (req, res) => {
 
-  // Create the new category.
-  Category.create({
-    title: req.body.categoryTitle
+  Category.findAll({
+    where: { title: req.body.categoryTitle }
   })
-    .then(category => {
+   .then(category => {
 
-      // Create a project with the category id.
-      Project.create({
-        projectName: req.body.projectName,
-        description: req.body.description,
-        startDate: req.body.startDate,
-        userId: req.user.id,
-        categoryId: category.id
+    if (category.length === 0) {
+      // Create the new category.
+      Category.create({
+        title: req.body.categoryTitle
       })
-        .then(project => {
+        .then(category => {
 
-          // Iterate through the incoming task array and create each to task associated to the project.
-          req.body.tasks.forEach(task => {
-
-            Task.create({
-              taskDescription: task.taskDescription,
-              isComplete: task.isComplete,
-              projectId: project.id
-            })
-              .then(task => res.json({
-                status: 200,
-                category: category,
-                project: project,
-                task: task
-              }))
-              .catch(err => res.json({
-                status: 400,
-                err: err
-              }))
-
+          // Create a project with the category id.
+          Project.create({
+            projectName: req.body.projectName,
+            description: req.body.description,
+            startDate: req.body.startDate,
+            // userId: req.user.id,
+            categoryId: category.id
           })
+            .then(project => {
+
+              // Iterate through the incoming task array and create each to task associated to the project.
+              req.body.tasks.forEach(task => {
+
+                Task.create({
+                  taskDescription: task.taskDescription,
+                  isComplete: task.isComplete,
+                  projectId: project.id
+                })
+                  .then(task => res.json({
+                    status: 200,
+                    category: category,
+                    project: project,
+                    task: task
+                  }))
+                  .catch(err => res.json({
+                    status: 400,
+                    err: err
+                  }))
+
+              })
+
+            })
+            .catch(err => res.json({
+              status: 400,
+              err: err
+            }))
 
         })
         .catch(err => res.json({
           status: 400,
           err: err
         }))
-
-    })
-    .catch(err => res.json({
-      status: 400,
-      err: err
-    }))
-
-})
-
-router.post('/projects/existingCategory', passport.authenticate('jwt'), (req, res) => {
-
-  // If the category already exists, run get method instead of create.
-  Category.findAll({
-    where: { title: req.body.categoryTitle }
-  })
-    .then(category => {
+    }
+    else {
 
       // Create a project with the category id.
       Project.create({
         projectName: req.body.projectName,
         description: req.body.description,
         startDate: req.body.startDate,
-        userId: req.user.id,
+        // userId: req.user.id,
         categoryId: category[0].id
       })
         .then(project => {
+          console.log(project)
 
           // Iterate through the incoming task array and create each to task associated to the project.
           req.body.tasks.forEach(task => {
@@ -163,12 +144,13 @@ router.post('/projects/existingCategory', passport.authenticate('jwt'), (req, re
           status: 400,
           err: 'Project error'
         }))
+    }
 
-    })
-    .catch(err => res.json({
-      status: 400,
-      err: 'Category get error'
-    }))
+  })
+  .catch(err => res.json({
+    status: 400,
+    err: 'Find match error'
+  }))
 
 })
 
