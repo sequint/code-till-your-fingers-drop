@@ -1,78 +1,5 @@
-// Function assigns the categoryId to the project based on category title.
-const addCategoryId = (categoryName, projectData) => {
-
-  // Check if category typed in already exists.
-  axios.get('/api/categories')
-    .then(({ data: payload }) => {
-      let categoryMatch = payload.categories.filter(category => category.title === categoryName)
-      console.log(payload)
-      if (categoryMatch.length === 0) {
-
-        // Post new category
-        axios.post('/api/categories', {
-          title: categoryName
-        })
-          .then(({ data: payload }) => {
-
-            let categoryId = payload.category.id
-            console.log(categoryId)
-            console.log(projectData.id)
-
-            // Update the specific project with the new category id.
-            axios.put(`/api/projects/${projectData.id}`, {
-              categoryId: categoryId
-            }, {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-              }
-            })
-              .then(({ data: payload }) => console.log(payload))
-              .catch(err => console.log(err))
-
-          })
-          .catch(err => console.log(err))
-      }
-      else {
-        // Update the specific project with the matched category id.
-        axios.put(`/api/projects/${projectData.id}`, {
-          categoryId: categoryMatch[0].id
-        }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        })
-      }
-
-    })
-    .catch(err => console.log(err))
-
-}
-
 // Create an array to hold the tasks entered.
 let tasks = []
-
-// Create a function to post the tasks into the array to tasks table with the project id attached.
-const addTasks = projectData => {
-
-  // Iterate through tasks list and post each task to the tasks model with current project id.
-  tasks.forEach(task => {
-    axios.post('/api/tasks', {
-      taskDescription: task,
-      isComplete: false,
-      projectId: projectData.id
-    })
-
-  })
-
-  updateProgressBar(projectData.id)
-
-}
-
-document.getElementById('logOutBtn').addEventListener('click', event => {
-
-  window.location.href = './auth.html'
-
-})
 
 // Handle create project click.
 document.getElementById('createProject').addEventListener('click', event => {
@@ -145,6 +72,13 @@ document.addEventListener('click', event => {
     window.location.href = './exprojectPg.html'
 
   }
+
+})
+
+// Log out click.
+document.getElementById('logOutBtn').addEventListener('click', event => {
+
+  window.location.href = './auth.html'
 
 })
 
