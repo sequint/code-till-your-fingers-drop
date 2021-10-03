@@ -1,6 +1,6 @@
 ![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)
 
-# Project #2
+# PUB
 
 A web app that allows users to create and manage projects that they are working on. The user can add tasks to a project which then populates a timeline for the project.
 Other users can comment on those tasks to help them out and follow the project if they like it!
